@@ -1,0 +1,50 @@
+{
+  "payments": [
+    {
+      "id": "pay_001",
+      "appointmentId": "appt_001",
+      "amount": 1200,
+      "currency": "BDT",
+      "method": "bkash",
+      "status": "success",
+      "transactionId": "TXN20260724A001",
+      "paidAt": "2026-07-24T09:15:00Z"
+    },
+    {
+      "id": "pay_002",
+      "appointmentId": "appt_002",
+      "amount": 1300,
+      "currency": "BDT",
+      "method": "card",
+      "status": "success",
+      "transactionId": "TXN20260610C044",
+      "paidAt": "2026-06-10T14:25:00Z"
+    },
+    {
+      "id": "pay_003",
+      "appointmentId": "appt_003",
+      "amount": 500,
+      "currency": "BDT",
+      "method": "bkash",
+      "status": "success",
+      "transactionId": "TXN20260430B090",
+      "paidAt": "2026-04-30T08:05:00Z"
+    },
+    {
+      "id": "pay_004",
+      "appointmentId": "appt_004",
+      "amount": 1500,
+      "currency": "BDT",
+      "method": "card",
+      "status": "refunded",
+      "transactionId": "TXN20260715C077",
+      "paidAt": "2026-07-15T11:05:00Z",
+      "refundedAt": "2026-07-20T10:00:00Z"
+    }
+  ],
+  "payment_methods": [
+    { "id": "bkash", "name": "bKash", "icon": "bkash_logo" },
+    { "id": "nagad", "name": "Nagad", "icon": "nagad_logo" },
+    { "id": "card", "name": "Credit/Debit Card", "icon": "card_icon" }
+  ]
+}

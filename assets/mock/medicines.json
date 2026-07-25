@@ -1,0 +1,62 @@
+{
+  "medicines": [
+    {
+      "id": "med_001",
+      "patientId": "usr_001",
+      "name": "Napa Extra",
+      "dosage": "1 tablet",
+      "form": "tablet",
+      "frequency": "twice_daily",
+      "reminderTimes": ["08:00 AM", "08:00 PM"],
+      "startDate": "2026-07-20",
+      "endDate": "2026-07-27",
+      "instructions": "Take after meal",
+      "isActive": true,
+      "adherenceLog": [
+        { "date": "2026-07-20", "time": "08:00 AM", "taken": true },
+        { "date": "2026-07-20", "time": "08:00 PM", "taken": true },
+        { "date": "2026-07-21", "time": "08:00 AM", "taken": true },
+        { "date": "2026-07-21", "time": "08:00 PM", "taken": false },
+        { "date": "2026-07-22", "time": "08:00 AM", "taken": true },
+        { "date": "2026-07-22", "time": "08:00 PM", "taken": true }
+      ]
+    },
+    {
+      "id": "med_002",
+      "patientId": "usr_001",
+      "name": "Atorva 10",
+      "dosage": "1 tablet",
+      "form": "tablet",
+      "frequency": "once_daily",
+      "reminderTimes": ["09:00 PM"],
+      "startDate": "2026-06-01",
+      "endDate": "2026-08-30",
+      "instructions": "Take before sleep, cholesterol control",
+      "isActive": true,
+      "adherenceLog": [
+        { "date": "2026-07-22", "time": "09:00 PM", "taken": true },
+        { "date": "2026-07-23", "time": "09:00 PM", "taken": true },
+        { "date": "2026-07-24", "time": "09:00 PM", "taken": false }
+      ]
+    },
+    {
+      "id": "med_003",
+      "patientId": "usr_001",
+      "name": "Seclo 20",
+      "dosage": "1 capsule",
+      "form": "capsule",
+      "frequency": "once_daily",
+      "reminderTimes": ["07:30 AM"],
+      "startDate": "2026-04-01",
+      "endDate": "2026-04-15",
+      "instructions": "Take before breakfast, empty stomach",
+      "isActive": false,
+      "adherenceLog": [
+        { "date": "2026-04-01", "time": "07:30 AM", "taken": true },
+        { "date": "2026-04-14", "time": "07:30 AM", "taken": true },
+        { "date": "2026-04-15", "time": "07:30 AM", "taken": true }
+      ]
+    }
+  ],
+  "frequency_options": ["once_daily", "twice_daily", "three_times_daily", "as_needed"]
+}

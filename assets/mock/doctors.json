@@ -1,0 +1,219 @@
+{
+  "doctors": [
+    {
+      "id": "doc_001",
+      "name": "Dr. Farhana Ahmed",
+      "specializationId": "spec_01",
+      "specializationName": "Cardiologist",
+      "photoUrl": "https://i.pravatar.cc/300?img=32",
+      "experienceYears": 12,
+      "rating": 4.8,
+      "reviewCount": 214,
+      "consultationFee": 1200,
+      "currency": "BDT",
+      "hospital": "Dhaka Heart Institute",
+      "location": "Dhanmondi, Dhaka",
+      "bio": "Senior cardiologist specializing in interventional cardiology and heart failure management with over a decade of clinical experience.",
+      "education": ["MBBS - Dhaka Medical College", "FCPS (Cardiology)", "Fellowship in Interventional Cardiology - Singapore"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": true,
+      "availableSlots": [
+        { "date": "2026-07-26", "slots": ["10:00 AM", "10:30 AM", "11:00 AM", "04:00 PM", "04:30 PM"] },
+        { "date": "2026-07-27", "slots": ["09:00 AM", "09:30 AM", "05:00 PM"] },
+        { "date": "2026-07-28", "slots": ["10:00 AM", "11:30 AM", "03:00 PM"] }
+      ]
+    },
+    {
+      "id": "doc_002",
+      "name": "Dr. Kamrul Hasan",
+      "specializationId": "spec_01",
+      "specializationName": "Cardiologist",
+      "photoUrl": "https://i.pravatar.cc/300?img=51",
+      "experienceYears": 8,
+      "rating": 4.5,
+      "reviewCount": 132,
+      "consultationFee": 900,
+      "currency": "BDT",
+      "hospital": "Square Hospital",
+      "location": "Panthapath, Dhaka",
+      "bio": "Cardiologist with expertise in preventive cardiology and non-invasive cardiac imaging.",
+      "education": ["MBBS - Sir Salimullah Medical College", "MD (Cardiology)"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": false,
+      "availableSlots": [
+        { "date": "2026-07-27", "slots": ["11:00 AM", "11:30 AM", "12:00 PM"] },
+        { "date": "2026-07-29", "slots": ["09:00 AM", "09:30 AM"] }
+      ]
+    },
+    {
+      "id": "doc_003",
+      "name": "Dr. Nusrat Jahan",
+      "specializationId": "spec_02",
+      "specializationName": "Dermatologist",
+      "photoUrl": "https://i.pravatar.cc/300?img=45",
+      "experienceYears": 9,
+      "rating": 4.7,
+      "reviewCount": 189,
+      "consultationFee": 1000,
+      "currency": "BDT",
+      "hospital": "Apollo Skin Care Center",
+      "location": "Gulshan, Dhaka",
+      "bio": "Dermatologist focused on acne treatment, skin allergies, and cosmetic dermatology.",
+      "education": ["MBBS - Chittagong Medical College", "DDV (Dermatology)"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": true,
+      "availableSlots": [
+        { "date": "2026-07-26", "slots": ["01:00 PM", "01:30 PM", "02:00 PM"] },
+        { "date": "2026-07-28", "slots": ["10:00 AM", "10:30 AM"] }
+      ]
+    },
+    {
+      "id": "doc_004",
+      "name": "Dr. Shahriar Kabir",
+      "specializationId": "spec_03",
+      "specializationName": "Neurologist",
+      "photoUrl": "https://i.pravatar.cc/300?img=60",
+      "experienceYears": 15,
+      "rating": 4.9,
+      "reviewCount": 301,
+      "consultationFee": 1500,
+      "currency": "BDT",
+      "hospital": "National Institute of Neurosciences",
+      "location": "Sher-e-Bangla Nagar, Dhaka",
+      "bio": "Senior neurologist with special interest in stroke management and epilepsy treatment.",
+      "education": ["MBBS - Rajshahi Medical College", "FCPS (Neurology)", "PhD (Neuroscience) - UK"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": true,
+      "availableSlots": [
+        { "date": "2026-07-26", "slots": ["09:00 AM", "09:30 AM"] },
+        { "date": "2026-07-30", "slots": ["02:00 PM", "02:30 PM", "03:00 PM"] }
+      ]
+    },
+    {
+      "id": "doc_005",
+      "name": "Dr. Afsana Karim",
+      "specializationId": "spec_04",
+      "specializationName": "Pediatrician",
+      "photoUrl": "https://i.pravatar.cc/300?img=41",
+      "experienceYears": 10,
+      "rating": 4.6,
+      "reviewCount": 176,
+      "consultationFee": 800,
+      "currency": "BDT",
+      "hospital": "Shishu Hospital",
+      "location": "Sher-e-Bangla Nagar, Dhaka",
+      "bio": "Pediatrician dedicated to child growth, nutrition, and vaccination care.",
+      "education": ["MBBS - Dhaka Medical College", "DCH (Pediatrics)"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": true,
+      "availableSlots": [
+        { "date": "2026-07-26", "slots": ["11:00 AM", "11:30 AM", "12:00 PM"] }
+      ]
+    },
+    {
+      "id": "doc_006",
+      "name": "Dr. Imran Chowdhury",
+      "specializationId": "spec_05",
+      "specializationName": "Orthopedic",
+      "photoUrl": "https://i.pravatar.cc/300?img=53",
+      "experienceYears": 11,
+      "rating": 4.4,
+      "reviewCount": 98,
+      "consultationFee": 1100,
+      "currency": "BDT",
+      "hospital": "United Hospital",
+      "location": "Gulshan, Dhaka",
+      "bio": "Orthopedic surgeon specializing in sports injuries and joint replacement.",
+      "education": ["MBBS - Sylhet MAG Osmani Medical College", "MS (Orthopedics)"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": false,
+      "availableSlots": [
+        { "date": "2026-07-29", "slots": ["10:00 AM", "10:30 AM"] }
+      ]
+    },
+    {
+      "id": "doc_007",
+      "name": "Dr. Sabrina Yasmin",
+      "specializationId": "spec_06",
+      "specializationName": "Gynecologist",
+      "photoUrl": "https://i.pravatar.cc/300?img=47",
+      "experienceYears": 13,
+      "rating": 4.8,
+      "reviewCount": 245,
+      "consultationFee": 1300,
+      "currency": "BDT",
+      "hospital": "Ibn Sina Hospital",
+      "location": "Kallyanpur, Dhaka",
+      "bio": "Gynecologist and obstetrician with focus on maternal health and fertility care.",
+      "education": ["MBBS - Mymensingh Medical College", "FCPS (Gynecology & Obstetrics)"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": true,
+      "availableSlots": [
+        { "date": "2026-07-26", "slots": ["03:00 PM", "03:30 PM", "04:00 PM"] }
+      ]
+    },
+    {
+      "id": "doc_008",
+      "name": "Dr. Tanvir Ahmed",
+      "specializationId": "spec_07",
+      "specializationName": "Dentist",
+      "photoUrl": "https://i.pravatar.cc/300?img=56",
+      "experienceYears": 7,
+      "rating": 4.3,
+      "reviewCount": 87,
+      "consultationFee": 700,
+      "currency": "BDT",
+      "hospital": "Smile Dental Care",
+      "location": "Uttara, Dhaka",
+      "bio": "General and cosmetic dentist providing root canal, whitening, and orthodontic consultation.",
+      "education": ["BDS - Dhaka Dental College"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": true,
+      "availableSlots": [
+        { "date": "2026-07-26", "slots": ["12:00 PM", "12:30 PM"] }
+      ]
+    },
+    {
+      "id": "doc_009",
+      "name": "Dr. Rummana Haque",
+      "specializationId": "spec_08",
+      "specializationName": "Psychiatrist",
+      "photoUrl": "https://i.pravatar.cc/300?img=39",
+      "experienceYears": 9,
+      "rating": 4.7,
+      "reviewCount": 156,
+      "consultationFee": 1400,
+      "currency": "BDT",
+      "hospital": "National Institute of Mental Health",
+      "location": "Sher-e-Bangla Nagar, Dhaka",
+      "bio": "Psychiatrist specializing in anxiety, depression, and adolescent mental health.",
+      "education": ["MBBS - Dhaka Medical College", "MD (Psychiatry)"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": false,
+      "availableSlots": [
+        { "date": "2026-07-28", "slots": ["04:00 PM", "04:30 PM"] }
+      ]
+    },
+    {
+      "id": "doc_010",
+      "name": "Dr. Mahfuzur Rahman",
+      "specializationId": "spec_09",
+      "specializationName": "General Physician",
+      "photoUrl": "https://i.pravatar.cc/300?img=58",
+      "experienceYears": 6,
+      "rating": 4.2,
+      "reviewCount": 64,
+      "consultationFee": 500,
+      "currency": "BDT",
+      "hospital": "Popular Diagnostic Center",
+      "location": "Dhanmondi, Dhaka",
+      "bio": "General physician providing primary care for common illnesses and health checkups.",
+      "education": ["MBBS - Chittagong Medical College"],
+      "languages": ["Bengali", "English"],
+      "isAvailableToday": true,
+      "availableSlots": [
+        { "date": "2026-07-26", "slots": ["09:00 AM", "09:15 AM", "09:30 AM", "09:45 AM"] }
+      ]
+    }
+  ]
+}

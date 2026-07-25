@@ -1,0 +1,14 @@
+{
+  "specializations": [
+    { "id": "spec_01", "name": "Cardiologist", "icon": "heart_pulse", "doctorCount": 4 },
+    { "id": "spec_02", "name": "Dermatologist", "icon": "skin", "doctorCount": 3 },
+    { "id": "spec_03", "name": "Neurologist", "icon": "brain", "doctorCount": 2 },
+    { "id": "spec_04", "name": "Pediatrician", "icon": "baby", "doctorCount": 3 },
+    { "id": "spec_05", "name": "Orthopedic", "icon": "bone", "doctorCount": 2 },
+    { "id": "spec_06", "name": "Gynecologist", "icon": "female", "doctorCount": 2 },
+    { "id": "spec_07", "name": "Dentist", "icon": "tooth", "doctorCount": 2 },
+    { "id": "spec_08", "name": "Psychiatrist", "icon": "mind", "doctorCount": 2 },
+    { "id": "spec_09", "name": "General Physician", "icon": "stethoscope", "doctorCount": 3 },
+    { "id": "spec_10", "name": "ENT Specialist", "icon": "ear", "doctorCount": 2 }
+  ]
+}

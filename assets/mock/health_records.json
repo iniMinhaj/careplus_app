@@ -1,0 +1,57 @@
+{
+  "health_records": [
+    {
+      "id": "rec_001",
+      "patientId": "usr_001",
+      "title": "Prescription - Fever & Cold",
+      "type": "prescription",
+      "relatedDoctorId": "doc_010",
+      "relatedDoctorName": "Dr. Mahfuzur Rahman",
+      "relatedAppointmentId": "appt_003",
+      "fileUrl": "https://example.com/mock-files/prescription_001.pdf",
+      "fileType": "pdf",
+      "date": "2026-05-02",
+      "notes": "Paracetamol 500mg twice daily for 5 days, plenty of fluids"
+    },
+    {
+      "id": "rec_002",
+      "patientId": "usr_001",
+      "title": "Annual Checkup Report",
+      "type": "lab_report",
+      "relatedDoctorId": "doc_007",
+      "relatedDoctorName": "Dr. Sabrina Yasmin",
+      "relatedAppointmentId": "appt_002",
+      "fileUrl": "https://example.com/mock-files/lab_report_002.pdf",
+      "fileType": "pdf",
+      "date": "2026-06-15",
+      "notes": "All parameters within normal range"
+    },
+    {
+      "id": "rec_003",
+      "patientId": "usr_001",
+      "title": "Blood Test - CBC",
+      "type": "lab_report",
+      "relatedDoctorId": null,
+      "relatedDoctorName": null,
+      "relatedAppointmentId": null,
+      "fileUrl": "https://example.com/mock-files/cbc_report.jpg",
+      "fileType": "image",
+      "date": "2026-03-10",
+      "notes": "Self-uploaded, routine blood work at Popular Diagnostic"
+    },
+    {
+      "id": "rec_004",
+      "patientId": "usr_001",
+      "title": "X-Ray - Left Knee",
+      "type": "imaging",
+      "relatedDoctorId": "doc_006",
+      "relatedDoctorName": "Dr. Imran Chowdhury",
+      "relatedAppointmentId": null,
+      "fileUrl": "https://example.com/mock-files/xray_knee.jpg",
+      "fileType": "image",
+      "date": "2026-02-18",
+      "notes": "Minor cartilage wear, physiotherapy recommended"
+    }
+  ],
+  "record_types": ["prescription", "lab_report", "imaging", "vaccination", "other"]
+}
