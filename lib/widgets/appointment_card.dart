@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../core/theme/app_color.dart';
 import '../models/models.dart';
-import '../theme/app_theme.dart';
 
 class AppointmentCard extends StatelessWidget {
   final AppointmentModel appointment;
@@ -75,21 +75,27 @@ class AppointmentCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(appointment.doctorName,
-                          style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 14)),
                       Text(appointment.specializationName,
-                          style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                          style: const TextStyle(
+                              color: AppColors.textSecondary, fontSize: 12)),
                     ],
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: _statusColor().withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     appointment.status.toUpperCase(),
-                    style: TextStyle(color: _statusColor(), fontSize: 10, fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                        color: _statusColor(),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
               ],
@@ -97,17 +103,21 @@ class AppointmentCard extends StatelessWidget {
             const Divider(height: 20),
             Row(
               children: [
-                const Icon(Icons.calendar_today_outlined, size: 14, color: AppColors.textSecondary),
+                const Icon(Icons.calendar_today_outlined,
+                    size: 14, color: AppColors.textSecondary),
                 const SizedBox(width: 6),
                 Text('${appointment.date} · ${appointment.time}',
                     style: const TextStyle(fontSize: 12)),
                 const SizedBox(width: 14),
-                Icon(_consultationIcon(), size: 14, color: AppColors.textSecondary),
+                Icon(_consultationIcon(),
+                    size: 14, color: AppColors.textSecondary),
                 const SizedBox(width: 6),
-                Text(appointment.consultationType, style: const TextStyle(fontSize: 12)),
+                Text(appointment.consultationType,
+                    style: const TextStyle(fontSize: 12)),
                 const Spacer(),
                 Text('৳${appointment.fee}',
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 13)),
               ],
             ),
             if (appointment.status == 'upcoming' && onCancel != null) ...[

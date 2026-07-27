@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
 import 'otp_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -25,7 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (!mounted) return;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => OtpScreen(phone: _phoneController.text)),
+        MaterialPageRoute(
+            builder: (_) => OtpScreen(phone: _phoneController.text)),
       );
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -52,29 +52,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Full Name', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+                const Text('Full Name',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _nameController,
-                  validator: (v) => (v == null || v.isEmpty) ? 'Enter your name' : null,
+                  validator: (v) =>
+                      (v == null || v.isEmpty) ? 'Enter your name' : null,
                   decoration: const InputDecoration(hintText: 'Your full name'),
                 ),
                 const SizedBox(height: 18),
-                const Text('Email', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+                const Text('Email',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  validator: (v) => (v == null || !v.contains('@')) ? 'Enter a valid email' : null,
-                  decoration: const InputDecoration(hintText: 'you@example.com'),
+                  validator: (v) => (v == null || !v.contains('@'))
+                      ? 'Enter a valid email'
+                      : null,
+                  decoration:
+                      const InputDecoration(hintText: 'you@example.com'),
                 ),
                 const SizedBox(height: 18),
-                const Text('Phone Number', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+                const Text('Phone Number',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
-                  validator: (v) => (v == null || v.length < 10) ? 'Enter a valid phone number' : null,
+                  validator: (v) => (v == null || v.length < 10)
+                      ? 'Enter a valid phone number'
+                      : null,
                   decoration: const InputDecoration(hintText: '+8801XXXXXXXXX'),
                 ),
                 const SizedBox(height: 28),
@@ -84,7 +96,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ? const SizedBox(
                           width: 22,
                           height: 22,
-                          child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+                          child: CircularProgressIndicator(
+                              color: Colors.white, strokeWidth: 2.5),
                         )
                       : const Text('Send OTP'),
                 ),

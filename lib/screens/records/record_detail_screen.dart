@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/models.dart';
-import '../../theme/app_theme.dart';
+import '../../core/theme/app_theme.dart';
 
 class RecordDetailScreen extends StatelessWidget {
   final HealthRecordModel record;
@@ -28,12 +28,15 @@ class RecordDetailScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      record.fileType == 'pdf' ? Icons.picture_as_pdf_outlined : Icons.image_outlined,
+                      record.fileType == 'pdf'
+                          ? Icons.picture_as_pdf_outlined
+                          : Icons.image_outlined,
                       size: 48,
                       color: AppColors.primary,
                     ),
                     const SizedBox(height: 10),
-                    Text('${record.fileType.toUpperCase()} preview', style: const TextStyle(color: AppColors.textSecondary)),
+                    Text('${record.fileType.toUpperCase()} preview',
+                        style: const TextStyle(color: AppColors.textSecondary)),
                   ],
                 ),
               ),
@@ -41,11 +44,14 @@ class RecordDetailScreen extends StatelessWidget {
             const SizedBox(height: 20),
             _detailRow('Type', record.type.replaceAll('_', ' ')),
             _detailRow('Date', record.date),
-            if (record.relatedDoctorName != null) _detailRow('Doctor', record.relatedDoctorName!),
+            if (record.relatedDoctorName != null)
+              _detailRow('Doctor', record.relatedDoctorName!),
             const SizedBox(height: 12),
             const Text('Notes', style: TextStyle(fontWeight: FontWeight.w700)),
             const SizedBox(height: 6),
-            Text(record.notes, style: const TextStyle(color: AppColors.textSecondary, height: 1.4)),
+            Text(record.notes,
+                style: const TextStyle(
+                    color: AppColors.textSecondary, height: 1.4)),
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/models.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
+import '../../core/theme/app_theme.dart';
 import '../../widgets/common_widgets.dart';
 import 'record_detail_screen.dart';
 
@@ -62,7 +62,9 @@ class _HealthRecordsScreenState extends State<HealthRecordsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final filtered = _filter == 'all' ? _records : _records.where((r) => r.type == _filter).toList();
+    final filtered = _filter == 'all'
+        ? _records
+        : _records.where((r) => r.type == _filter).toList();
     return Scaffold(
       appBar: AppBar(title: const Text('Health Records')),
       body: Column(
@@ -86,26 +88,34 @@ class _HealthRecordsScreenState extends State<HealthRecordsScreen> {
             child: _isLoading
                 ? const LoadingView()
                 : _hasError
-                    ? ErrorView(message: 'Could not load records', onRetry: _loadRecords)
+                    ? ErrorView(
+                        message: 'Could not load records',
+                        onRetry: _loadRecords)
                     : filtered.isEmpty
-                        ? const EmptyView(message: 'No records found', icon: Icons.folder_off_outlined)
+                        ? const EmptyView(
+                            message: 'No records found',
+                            icon: Icons.folder_off_outlined)
                         : RefreshIndicator(
                             onRefresh: _loadRecords,
                             child: ListView.separated(
                               padding: const EdgeInsets.all(16),
                               itemCount: filtered.length,
-                              separatorBuilder: (_, __) => const SizedBox(height: 10),
+                              separatorBuilder: (_, __) =>
+                                  const SizedBox(height: 10),
                               itemBuilder: (context, index) {
                                 final record = filtered[index];
                                 return ListTile(
                                   onTap: () => Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (_) => RecordDetailScreen(record: record)),
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            RecordDetailScreen(record: record)),
                                   ),
                                   tileColor: AppColors.surface,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(14),
-                                    side: const BorderSide(color: AppColors.border),
+                                    side: const BorderSide(
+                                        color: AppColors.border),
                                   ),
                                   leading: Container(
                                     padding: const EdgeInsets.all(8),
@@ -113,12 +123,18 @@ class _HealthRecordsScreenState extends State<HealthRecordsScreen> {
                                       color: AppColors.primary.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    child: Icon(_iconForType(record.type), color: AppColors.primary),
+                                    child: Icon(_iconForType(record.type),
+                                        color: AppColors.primary),
                                   ),
-                                  title: Text(record.title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
-                                  subtitle: Text('${record.date}${record.relatedDoctorName != null ? ' · ${record.relatedDoctorName}' : ''}',
+                                  title: Text(record.title,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14)),
+                                  subtitle: Text(
+                                      '${record.date}${record.relatedDoctorName != null ? ' · ${record.relatedDoctorName}' : ''}',
                                       style: const TextStyle(fontSize: 12)),
-                                  trailing: const Icon(Icons.chevron_right, color: AppColors.textSecondary),
+                                  trailing: const Icon(Icons.chevron_right,
+                                      color: AppColors.textSecondary),
                                 );
                               },
                             ),
@@ -129,7 +145,9 @@ class _HealthRecordsScreenState extends State<HealthRecordsScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Upload flow — hook up image_picker / file_picker here')),
+            const SnackBar(
+                content: Text(
+                    'Upload flow — hook up image_picker / file_picker here')),
           );
         },
         icon: const Icon(Icons.upload_file_outlined),
@@ -143,7 +161,10 @@ class _HealthRecordsScreenState extends State<HealthRecordsScreen> {
     return Padding(
       padding: const EdgeInsets.only(right: 8),
       child: ChoiceChip(
-        label: Text(label, style: TextStyle(fontSize: 12, color: selected ? Colors.white : AppColors.textPrimary)),
+        label: Text(label,
+            style: TextStyle(
+                fontSize: 12,
+                color: selected ? Colors.white : AppColors.textPrimary)),
         selected: selected,
         onSelected: (_) => setState(() => _filter = value),
         selectedColor: AppColors.primary,

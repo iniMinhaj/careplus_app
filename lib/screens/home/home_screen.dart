@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../models/models.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
 import '../../widgets/specialization_chip.dart';
 import '../../widgets/doctor_card.dart';
 import '../../widgets/common_widgets.dart';
@@ -55,7 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _loadDoctors({String? specializationId}) async {
     setState(() => _doctorState = _LoadState.loading);
     try {
-      final result = await MockApiService.instance.getDoctors(specializationId: specializationId);
+      final result = await MockApiService.instance
+          .getDoctors(specializationId: specializationId);
       setState(() {
         _doctors = result;
         _doctorState = result.isEmpty ? _LoadState.empty : _LoadState.loaded;
@@ -104,7 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Hi, Rafiul 👋'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications_outlined)),
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.notifications_outlined)),
           const SizedBox(width: 8),
         ],
       ),
@@ -129,7 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 12),
             SectionTitle(
-              title: _selectedSpecializationId == null ? 'Top Doctors' : 'Filtered Doctors',
+              title: _selectedSpecializationId == null
+                  ? 'Top Doctors'
+                  : 'Filtered Doctors',
             ),
             _buildDoctorList(),
             const SizedBox(height: 24),
@@ -144,7 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
       case _LoadState.loading:
         return const Center(child: CircularProgressIndicator());
       case _LoadState.error:
-        return ErrorView(message: 'Could not load categories', onRetry: _loadSpecializations);
+        return ErrorView(
+            message: 'Could not load categories',
+            onRetry: _loadSpecializations);
       case _LoadState.empty:
         return const EmptyView(message: 'No specializations found');
       case _LoadState.loaded:
@@ -166,11 +171,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildDoctorList() {
     switch (_doctorState) {
       case _LoadState.loading:
-        return const Padding(padding: EdgeInsets.all(30), child: Center(child: CircularProgressIndicator()));
+        return const Padding(
+            padding: EdgeInsets.all(30),
+            child: Center(child: CircularProgressIndicator()));
       case _LoadState.error:
-        return ErrorView(message: 'Could not load doctors', onRetry: () => _loadDoctors());
+        return ErrorView(
+            message: 'Could not load doctors', onRetry: () => _loadDoctors());
       case _LoadState.empty:
-        return const EmptyView(message: 'No doctors found', icon: Icons.search_off);
+        return const EmptyView(
+            message: 'No doctors found', icon: Icons.search_off);
       case _LoadState.loaded:
         return ListView.separated(
           shrinkWrap: true,
@@ -183,7 +192,8 @@ class _HomeScreenState extends State<HomeScreen> {
               doctor: doctor,
               onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => DoctorDetailScreen(doctorId: doctor.id)),
+                MaterialPageRoute(
+                    builder: (_) => DoctorDetailScreen(doctorId: doctor.id)),
               ),
             );
           },

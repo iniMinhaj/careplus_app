@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
+import '../../core/theme/app_theme.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
@@ -24,7 +24,8 @@ class _OtpScreenState extends State<OtpScreen> {
       _isLoading = true;
       _errorMessage = null;
     });
-    final verified = await MockApiService.instance.verifyOtp(_otpController.text);
+    final verified =
+        await MockApiService.instance.verifyOtp(_otpController.text);
     if (!mounted) return;
     setState(() => _isLoading = false);
     if (verified) {
@@ -58,12 +59,18 @@ class _OtpScreenState extends State<OtpScreen> {
                 keyboardType: TextInputType.number,
                 maxLength: 4,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 24, letterSpacing: 12, fontWeight: FontWeight.w700),
-                decoration: const InputDecoration(counterText: '', hintText: '----'),
+                style: const TextStyle(
+                    fontSize: 24,
+                    letterSpacing: 12,
+                    fontWeight: FontWeight.w700),
+                decoration:
+                    const InputDecoration(counterText: '', hintText: '----'),
               ),
               if (_errorMessage != null) ...[
                 const SizedBox(height: 8),
-                Text(_errorMessage!, style: const TextStyle(color: AppColors.danger, fontSize: 13)),
+                Text(_errorMessage!,
+                    style:
+                        const TextStyle(color: AppColors.danger, fontSize: 13)),
               ],
               const SizedBox(height: 24),
               ElevatedButton(
@@ -72,14 +79,16 @@ class _OtpScreenState extends State<OtpScreen> {
                     ? const SizedBox(
                         width: 22,
                         height: 22,
-                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+                        child: CircularProgressIndicator(
+                            color: Colors.white, strokeWidth: 2.5),
                       )
                     : const Text('Verify'),
               ),
               const SizedBox(height: 12),
               Center(
                 child: TextButton(
-                  onPressed: () => MockApiService.instance.requestOtp(widget.phone),
+                  onPressed: () =>
+                      MockApiService.instance.requestOtp(widget.phone),
                   child: const Text('Resend OTP'),
                 ),
               ),

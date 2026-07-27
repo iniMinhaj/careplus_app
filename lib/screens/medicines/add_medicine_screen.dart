@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
+import '../../core/theme/app_theme.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   const AddMedicineScreen({super.key});
@@ -26,7 +26,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
   ];
 
   Future<void> _pickTime(int index) async {
-    final picked = await showTimePicker(context: context, initialTime: _reminderTimes[index]);
+    final picked = await showTimePicker(
+        context: context, initialTime: _reminderTimes[index]);
     if (picked != null) {
       setState(() => _reminderTimes[index] = picked);
     }
@@ -83,28 +84,34 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Medicine Name', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+              const Text('Medicine Name',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
               const SizedBox(height: 6),
               TextFormField(
                 controller: _nameController,
-                validator: (v) => (v == null || v.isEmpty) ? 'Enter medicine name' : null,
+                validator: (v) =>
+                    (v == null || v.isEmpty) ? 'Enter medicine name' : null,
                 decoration: const InputDecoration(hintText: 'e.g. Napa Extra'),
               ),
               const SizedBox(height: 16),
-              const Text('Dosage', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+              const Text('Dosage',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
               const SizedBox(height: 6),
               TextFormField(
                 controller: _dosageController,
-                validator: (v) => (v == null || v.isEmpty) ? 'Enter dosage' : null,
+                validator: (v) =>
+                    (v == null || v.isEmpty) ? 'Enter dosage' : null,
                 decoration: const InputDecoration(hintText: 'e.g. 1 tablet'),
               ),
               const SizedBox(height: 16),
-              const Text('Frequency', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+              const Text('Frequency',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
               const SizedBox(height: 6),
               DropdownButtonFormField<String>(
                 value: _frequency,
                 items: _frequencyOptions
-                    .map((f) => DropdownMenuItem(value: f, child: Text(f.replaceAll('_', ' '))))
+                    .map((f) => DropdownMenuItem(
+                        value: f, child: Text(f.replaceAll('_', ' '))))
                     .toList(),
                 onChanged: (v) => setState(() => _frequency = v!),
               ),
@@ -112,7 +119,9 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Reminder Times', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+                  const Text('Reminder Times',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                   TextButton.icon(
                     onPressed: _addTimeSlot,
                     icon: const Icon(Icons.add, size: 16),
@@ -125,25 +134,32 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 runSpacing: 8,
                 children: List.generate(_reminderTimes.length, (index) {
                   return ActionChip(
-                    avatar: const Icon(Icons.access_time, size: 16, color: AppColors.primary),
+                    avatar: const Icon(Icons.access_time,
+                        size: 16, color: AppColors.primary),
                     label: Text(_formatTime(_reminderTimes[index])),
                     onPressed: () => _pickTime(index),
                   );
                 }),
               ),
               const SizedBox(height: 16),
-              const Text('Instructions (optional)', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+              const Text('Instructions (optional)',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
               const SizedBox(height: 6),
               TextFormField(
                 controller: _instructionsController,
                 maxLines: 2,
-                decoration: const InputDecoration(hintText: 'e.g. Take after meal'),
+                decoration:
+                    const InputDecoration(hintText: 'e.g. Take after meal'),
               ),
               const SizedBox(height: 28),
               ElevatedButton(
                 onPressed: _isSaving ? null : _handleSave,
                 child: _isSaving
-                    ? const SizedBox(width: 22, height: 22, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5))
+                    ? const SizedBox(
+                        width: 22,
+                        height: 22,
+                        child: CircularProgressIndicator(
+                            color: Colors.white, strokeWidth: 2.5))
                     : const Text('Save Medicine'),
               ),
             ],

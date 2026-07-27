@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import '../core/theme/app_theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,12 +33,16 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: const Icon(Icons.favorite, color: AppColors.primary, size: 48),
+              child: const Icon(Icons.favorite,
+                  color: AppColors.primary, size: 48),
             ),
             const SizedBox(height: 20),
             const Text(
               'CarePlus',
-              style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w800),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 8),
             const Text(
@@ -49,7 +53,8 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(
               width: 24,
               height: 24,
-              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+              child: CircularProgressIndicator(
+                  color: Colors.white, strokeWidth: 2.5),
             ),
           ],
         ),

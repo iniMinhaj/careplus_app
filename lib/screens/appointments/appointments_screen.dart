@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../core/theme/app_color.dart';
 import '../../models/models.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
+import '../../core/theme/app_theme.dart';
 import '../../widgets/appointment_card.dart';
 import '../../widgets/common_widgets.dart';
 
@@ -58,7 +59,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
 
   List<AppointmentModel> _filterByStatus(String status) {
     if (status == 'upcoming') {
-      return _appointments.where((a) => a.status == 'upcoming' || a.status == 'ongoing').toList();
+      return _appointments
+          .where((a) => a.status == 'upcoming' || a.status == 'ongoing')
+          .toList();
     }
     return _appointments.where((a) => a.status == status).toList();
   }
@@ -89,7 +92,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
       body: _isLoading
           ? const LoadingView()
           : _hasError
-              ? ErrorView(message: 'Could not load appointments', onRetry: _loadAppointments)
+              ? ErrorView(
+                  message: 'Could not load appointments',
+                  onRetry: _loadAppointments)
               : TabBarView(
                   controller: _tabController,
                   children: [
@@ -103,7 +108,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
 
   Widget _buildList(List<AppointmentModel> items, {bool showCancel = false}) {
     if (items.isEmpty) {
-      return const EmptyView(message: 'Nothing here yet', icon: Icons.event_busy_outlined);
+      return const EmptyView(
+          message: 'Nothing here yet', icon: Icons.event_busy_outlined);
     }
     return RefreshIndicator(
       onRefresh: _loadAppointments,

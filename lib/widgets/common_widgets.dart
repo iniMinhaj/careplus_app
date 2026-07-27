@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import '../core/theme/app_theme.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;
@@ -14,7 +14,9 @@ class SectionTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+          Text(title,
+              style:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
           if (onSeeAll != null)
             TextButton(onPressed: onSeeAll, child: const Text('See all')),
         ],
@@ -28,8 +30,9 @@ class SectionTitle extends StatelessWidget {
 class LoadingView extends StatelessWidget {
   const LoadingView({super.key});
   @override
-  Widget build(BuildContext context) =>
-      const Center(child: Padding(padding: EdgeInsets.all(40), child: CircularProgressIndicator()));
+  Widget build(BuildContext context) => const Center(
+      child: Padding(
+          padding: EdgeInsets.all(40), child: CircularProgressIndicator()));
 }
 
 class ErrorView extends StatelessWidget {
@@ -60,7 +63,8 @@ class ErrorView extends StatelessWidget {
 class EmptyView extends StatelessWidget {
   final String message;
   final IconData icon;
-  const EmptyView({super.key, required this.message, this.icon = Icons.inbox_outlined});
+  const EmptyView(
+      {super.key, required this.message, this.icon = Icons.inbox_outlined});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +76,8 @@ class EmptyView extends StatelessWidget {
           children: [
             Icon(icon, color: AppColors.textSecondary, size: 40),
             const SizedBox(height: 12),
-            Text(message, style: const TextStyle(color: AppColors.textSecondary)),
+            Text(message,
+                style: const TextStyle(color: AppColors.textSecondary)),
           ],
         ),
       ),

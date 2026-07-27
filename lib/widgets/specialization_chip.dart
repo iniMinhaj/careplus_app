@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
-import '../theme/app_theme.dart';
+import '../core/theme/app_theme.dart';
 
 class SpecializationChip extends StatelessWidget {
   final SpecializationModel specialization;
@@ -39,12 +39,14 @@ class SpecializationChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected ? AppColors.primary : AppColors.surface,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: selected ? AppColors.primary : AppColors.border),
+          border: Border.all(
+              color: selected ? AppColors.primary : AppColors.border),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: selected ? Colors.white : AppColors.primary, size: 22),
+            Icon(icon,
+                color: selected ? Colors.white : AppColors.primary, size: 22),
             const SizedBox(height: 6),
             Text(
               specialization.name,

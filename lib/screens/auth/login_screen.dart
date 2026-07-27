@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
+import '../../core/theme/app_color.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,7 +11,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'rafiul.islam@example.com');
+  final _emailController =
+      TextEditingController(text: 'rafiul.islam@example.com');
   final _passwordController = TextEditingController(text: '••••••••');
   bool _isLoading = false;
   String? _errorMessage;
@@ -26,11 +27,13 @@ class _LoginScreenState extends State<LoginScreen> {
       _errorMessage = null;
     });
     try {
-      await MockApiService.instance.login(_emailController.text, _passwordController.text);
+      await MockApiService.instance
+          .login(_emailController.text, _passwordController.text);
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
-      setState(() => _errorMessage = 'Login failed. Please check your credentials.');
+      setState(
+          () => _errorMessage = 'Login failed. Please check your credentials.');
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -56,22 +59,29 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const SizedBox(height: 40),
                 const Text('Welcome back',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+                    style:
+                        TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                 const SizedBox(height: 6),
                 const Text('Login to continue managing your health',
                     style: TextStyle(color: AppColors.textSecondary)),
                 const SizedBox(height: 32),
-                const Text('Email', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+                const Text('Email',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  validator: (v) =>
-                      (v == null || !v.contains('@')) ? 'Enter a valid email' : null,
-                  decoration: const InputDecoration(hintText: 'you@example.com'),
+                  validator: (v) => (v == null || !v.contains('@'))
+                      ? 'Enter a valid email'
+                      : null,
+                  decoration:
+                      const InputDecoration(hintText: 'you@example.com'),
                 ),
                 const SizedBox(height: 18),
-                const Text('Password', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+                const Text('Password',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _passwordController,
@@ -81,14 +91,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     hintText: 'Enter your password',
                     suffixIcon: IconButton(
-                      icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
-                      onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                      icon: Icon(_obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () =>
+                          setState(() => _obscurePassword = !_obscurePassword),
                     ),
                   ),
                 ),
                 if (_errorMessage != null) ...[
                   const SizedBox(height: 14),
-                  Text(_errorMessage!, style: const TextStyle(color: AppColors.danger, fontSize: 13)),
+                  Text(_errorMessage!,
+                      style: const TextStyle(
+                          color: AppColors.danger, fontSize: 13)),
                 ],
                 const SizedBox(height: 28),
                 ElevatedButton(
@@ -97,7 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ? const SizedBox(
                           width: 22,
                           height: 22,
-                          child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+                          child: CircularProgressIndicator(
+                              color: Colors.white, strokeWidth: 2.5),
                         )
                       : const Text('Login'),
                 ),
