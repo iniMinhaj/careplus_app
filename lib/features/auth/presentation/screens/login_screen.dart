@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../core/network/mock_api_service.dart';
-import '../../core/theme/app_color.dart';
+import '../../../../core/network/mock_api_service.dart';
+import '../../../../core/theme/app_color.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,8 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   String? _errorMessage;
   bool _obscurePassword = true;
 
-  // TODO(migration): this whole method becomes `context.read<AuthBloc>().add(LoginRequested(...))`
-  // and _isLoading / _errorMessage become derived from AuthState via BlocBuilder.
   Future<void> _handleLogin() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() {

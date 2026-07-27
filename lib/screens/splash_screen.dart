@@ -12,8 +12,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // TODO(migration): replace with a bootstrap BLoC/Riverpod provider that
-    // checks stored auth token via SecureStorage and decides where to route.
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) Navigator.pushReplacementNamed(context, '/login');
     });

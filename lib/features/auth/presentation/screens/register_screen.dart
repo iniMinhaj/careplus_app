@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/network/mock_api_service.dart';
+import '../../../../core/network/mock_api_service.dart';
 import 'otp_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -14,7 +14,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isLoading = false;
+  bool _obscurePassword = true;
 
   Future<void> _handleRegister() async {
     if (!_formKey.currentState!.validate()) return;
@@ -37,6 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _nameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -88,6 +91,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ? 'Enter a valid phone number'
                       : null,
                   decoration: const InputDecoration(hintText: '+8801XXXXXXXXX'),
+                ),
+                const SizedBox(height: 18),
+                const Text('Password',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+                const SizedBox(height: 6),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: _obscurePassword,
+                  validator: (v) => (v == null || v.length < 6)
+                      ? 'Password must be at least 6 characters'
+                      : null,
+                  decoration: InputDecoration(
+                    hintText: 'Enter a password',
+                    suffixIcon: IconButton(
+                      icon: Icon(_obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () =>
+                          setState(() => _obscurePassword = !_obscurePassword),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 28),
                 ElevatedButton(

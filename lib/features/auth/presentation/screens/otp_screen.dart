@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../core/network/mock_api_service.dart';
-import '../../core/theme/app_theme.dart';
+import '../../../../core/network/mock_api_service.dart';
+import '../../../../core/theme/app_theme.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
