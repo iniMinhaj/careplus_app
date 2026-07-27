@@ -1,4 +1,5 @@
 import 'package:careplus/core/error/failures.dart';
+import 'package:careplus/features/auth/domain/entity/register_result.dart';
 import 'package:careplus/features/auth/domain/entity/user.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -8,7 +9,7 @@ abstract interface class AuthRepository {
     required String password,
   });
 
-  Future<Either<Failure, User>> register({
+  Future<Either<Failure, RegisterResult>> register({
     required String name,
     required String email,
     required String password,

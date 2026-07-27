@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class MockApiClient {
-  Future<Map<String, dynamic>> get(String assetPath,
+  Future<Map<String, dynamic>> load(String assetPath,
       {int latencyMs = 600}) async {
     await Future.delayed(Duration(milliseconds: latencyMs));
     final response = await rootBundle.loadString('assets/mock/$assetPath');

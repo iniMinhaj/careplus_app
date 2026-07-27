@@ -1,0 +1,19 @@
+{
+    "current_user": {
+        "id": "usr_001",
+        "name": "Minhajul Islam",
+        "email": "minhajul.islam@example.com",
+        "phone": "+8801711223344",
+        "photoUrl": "https://i.pravatar.cc/150?img=12",
+        "dateOfBirth": "1996-04-12",
+        "gender": "male",
+        "bloodGroup": "B+",
+        "address": "Road 12, Banani, Dhaka",
+        "emergencyContact": {
+            "name": "Jahidul Islam",
+            "relation": "Brother",
+            "phone": "+8801811223355"
+        },
+        "createdAt": "2025-01-14T10:00:00Z"
+    }
+}
