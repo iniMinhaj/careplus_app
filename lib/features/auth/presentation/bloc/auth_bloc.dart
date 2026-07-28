@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/usecase/usecase.dart';
 import '../../domain/usecase/check_auth_status_usecase.dart';
 import '../../domain/usecase/login_usecase.dart';
@@ -49,7 +48,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (failure) => emit(state.copyWith(status: AuthStatus.unauthenticated)),
       (isLoggedIn) => emit(state.copyWith(
-        status: isLoggedIn ? AuthStatus.authenticated : AuthStatus.unauthenticated,
+        status:
+            isLoggedIn ? AuthStatus.authenticated : AuthStatus.unauthenticated,
       )),
     );
   }
@@ -116,7 +116,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       phone: event.phone,
       clearError: true,
     ));
-    final result = await _requestOtpUsecase(RequestOtpParams(phone: event.phone));
+    final result =
+        await _requestOtpUsecase(RequestOtpParams(phone: event.phone));
     result.fold(
       (failure) => emit(state.copyWith(
         status: AuthStatus.failure,
@@ -157,6 +158,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     await _logoutUsecase(const NoParams());
-    emit(const AuthState.initial().copyWith(status: AuthStatus.unauthenticated));
+    emit(
+        const AuthState.initial().copyWith(status: AuthStatus.unauthenticated));
   }
 }
