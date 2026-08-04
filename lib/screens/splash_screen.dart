@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../core/theme/app_theme.dart';
+import '../features/auth/presentation/bloc/auth_bloc.dart';
+import '../features/auth/presentation/bloc/auth_state.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,11 +16,30 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // TODO(migration): replace with a bootstrap BLoC/Riverpod provider that
-    // checks stored auth token via SecureStorage and decides where to route.
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) Navigator.pushReplacementNamed(context, '/login');
-    });
+    _redirectWhenReady();
+  }
+
+  Future<void> _redirectWhenReady() async {
+    final authBloc = context.read<AuthBloc>();
+
+    await Future.delayed(const Duration(milliseconds: 900));
+    if (!mounted) return;
+
+    var status = authBloc.state.status;
+    if (status != AuthStatus.authenticated &&
+        status != AuthStatus.unauthenticated) {
+      status = await authBloc.stream
+          .firstWhere((s) =>
+              s.status == AuthStatus.authenticated ||
+              s.status == AuthStatus.unauthenticated)
+          .then((s) => s.status);
+    }
+    if (!mounted) return;
+
+    Navigator.pushReplacementNamed(
+      context,
+      status == AuthStatus.authenticated ? '/home' : '/login',
+    );
   }
 
   @override
@@ -33,12 +56,16 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: const Icon(Icons.favorite, color: AppColors.primary, size: 48),
+              child: const Icon(Icons.favorite,
+                  color: AppColors.primary, size: 48),
             ),
             const SizedBox(height: 20),
             const Text(
               'CarePlus',
-              style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w800),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 8),
             const Text(
@@ -49,7 +76,8 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(
               width: 24,
               height: 24,
-              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+              child: CircularProgressIndicator(
+                  color: Colors.white, strokeWidth: 2.5),
             ),
           ],
         ),

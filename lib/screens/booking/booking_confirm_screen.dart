@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/models.dart';
-import '../../theme/app_theme.dart';
+import '../../core/theme/app_theme.dart';
 import 'payment_screen.dart';
 
 class BookingConfirmScreen extends StatefulWidget {
@@ -49,17 +49,27 @@ class _BookingConfirmScreenState extends State<BookingConfirmScreen> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(widget.doctor.photoUrl, width: 56, height: 56, fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => Container(width: 56, height: 56, color: AppColors.border)),
+                    child: Image.network(widget.doctor.photoUrl,
+                        width: 56,
+                        height: 56,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Container(
+                            width: 56, height: 56, color: AppColors.border)),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.doctor.name, style: const TextStyle(fontWeight: FontWeight.w700)),
-                        Text(widget.doctor.specializationName, style: const TextStyle(color: AppColors.primary, fontSize: 12)),
-                        Text('${widget.date} · ${widget.time}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text(widget.doctor.name,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.w700)),
+                        Text(widget.doctor.specializationName,
+                            style: const TextStyle(
+                                color: AppColors.primary, fontSize: 12)),
+                        Text('${widget.date} · ${widget.time}',
+                            style: const TextStyle(
+                                fontSize: 12, color: AppColors.textSecondary)),
                       ],
                     ),
                   ),
@@ -67,7 +77,8 @@ class _BookingConfirmScreenState extends State<BookingConfirmScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            const Text('Consultation Type', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+            const Text('Consultation Type',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
             const SizedBox(height: 10),
             Row(
               children: [
@@ -75,22 +86,27 @@ class _BookingConfirmScreenState extends State<BookingConfirmScreen> {
                 const SizedBox(width: 10),
                 _typeOption('chat', Icons.chat_bubble_outline, 'Chat'),
                 const SizedBox(width: 10),
-                _typeOption('in-person', Icons.local_hospital_outlined, 'Visit'),
+                _typeOption(
+                    'in-person', Icons.local_hospital_outlined, 'Visit'),
               ],
             ),
             const SizedBox(height: 20),
-            const Text('Reason for visit', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+            const Text('Reason for visit',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
             const SizedBox(height: 10),
             TextField(
               controller: _reasonController,
               maxLines: 3,
-              decoration: const InputDecoration(hintText: 'Briefly describe your symptoms or reason...'),
+              decoration: const InputDecoration(
+                  hintText: 'Briefly describe your symptoms or reason...'),
             ),
             const SizedBox(height: 20),
-            _summaryRow('Consultation fee', '৳${widget.doctor.consultationFee}'),
+            _summaryRow(
+                'Consultation fee', '৳${widget.doctor.consultationFee}'),
             _summaryRow('Platform fee', '৳20'),
             const Divider(),
-            _summaryRow('Total', '৳${widget.doctor.consultationFee + 20}', bold: true),
+            _summaryRow('Total', '৳${widget.doctor.consultationFee + 20}',
+                bold: true),
             const SizedBox(height: 100),
           ],
         ),
@@ -128,15 +144,25 @@ class _BookingConfirmScreenState extends State<BookingConfirmScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 14),
           decoration: BoxDecoration(
-            color: selected ? AppColors.primary.withOpacity(0.08) : AppColors.surface,
+            color: selected
+                ? AppColors.primary.withOpacity(0.08)
+                : AppColors.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: selected ? AppColors.primary : AppColors.border),
+            border: Border.all(
+                color: selected ? AppColors.primary : AppColors.border),
           ),
           child: Column(
             children: [
-              Icon(icon, color: selected ? AppColors.primary : AppColors.textSecondary),
+              Icon(icon,
+                  color:
+                      selected ? AppColors.primary : AppColors.textSecondary),
               const SizedBox(height: 6),
-              Text(label, style: TextStyle(fontSize: 12, color: selected ? AppColors.primary : AppColors.textSecondary)),
+              Text(label,
+                  style: TextStyle(
+                      fontSize: 12,
+                      color: selected
+                          ? AppColors.primary
+                          : AppColors.textSecondary)),
             ],
           ),
         ),
@@ -150,8 +176,12 @@ class _BookingConfirmScreenState extends State<BookingConfirmScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontWeight: bold ? FontWeight.w700 : FontWeight.w400)),
-          Text(value, style: TextStyle(fontWeight: bold ? FontWeight.w700 : FontWeight.w400)),
+          Text(label,
+              style: TextStyle(
+                  fontWeight: bold ? FontWeight.w700 : FontWeight.w400)),
+          Text(value,
+              style: TextStyle(
+                  fontWeight: bold ? FontWeight.w700 : FontWeight.w400)),
         ],
       ),
     );

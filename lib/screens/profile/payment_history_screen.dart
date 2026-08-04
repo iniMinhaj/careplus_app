@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/models.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
+import '../../core/theme/app_theme.dart';
 import '../../widgets/common_widgets.dart';
 
 class PaymentHistoryScreen extends StatefulWidget {
@@ -59,9 +59,11 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen> {
       body: _isLoading
           ? const LoadingView()
           : _hasError
-              ? ErrorView(message: 'Could not load payments', onRetry: _loadPayments)
+              ? ErrorView(
+                  message: 'Could not load payments', onRetry: _loadPayments)
               : _payments.isEmpty
-                  ? const EmptyView(message: 'No payments yet', icon: Icons.payments_outlined)
+                  ? const EmptyView(
+                      message: 'No payments yet', icon: Icons.payments_outlined)
                   : ListView.separated(
                       padding: const EdgeInsets.all(16),
                       itemCount: _payments.length,
@@ -80,27 +82,40 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen> {
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  color: _statusColor(p.status).withOpacity(0.1),
+                                  color:
+                                      _statusColor(p.status).withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Icon(Icons.receipt_outlined, color: _statusColor(p.status)),
+                                child: Icon(Icons.receipt_outlined,
+                                    color: _statusColor(p.status)),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(p.transactionId, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
-                                    Text('${p.method.toUpperCase()} · ${p.paidAt.split('T').first}',
-                                        style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                                    Text(p.transactionId,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 13)),
+                                    Text(
+                                        '${p.method.toUpperCase()} · ${p.paidAt.split('T').first}',
+                                        style: const TextStyle(
+                                            fontSize: 11,
+                                            color: AppColors.textSecondary)),
                                   ],
                                 ),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Text('৳${p.amount}', style: const TextStyle(fontWeight: FontWeight.w700)),
-                                  Text(p.status, style: TextStyle(fontSize: 11, color: _statusColor(p.status))),
+                                  Text('৳${p.amount}',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w700)),
+                                  Text(p.status,
+                                      style: TextStyle(
+                                          fontSize: 11,
+                                          color: _statusColor(p.status))),
                                 ],
                               ),
                             ],

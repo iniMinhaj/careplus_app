@@ -1,12 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-import '../models/models.dart';
+import '../../models/models.dart';
 
-/// Simulates a real remote datasource.
-/// TODO(migration): when you introduce Clean Architecture + BLoC/Riverpod,
-/// this class's methods map almost 1:1 to your `*_remote_datasource.dart`
-/// files. Swap the `rootBundle.loadString` calls with real `dio.get(...)`
-/// calls and nothing else in the UI layer needs to change.
 class MockApiService {
   MockApiService._internal();
   static final MockApiService instance = MockApiService._internal();
@@ -15,8 +10,7 @@ class MockApiService {
   List<AppointmentModel>? _appointmentsCache;
   List<MedicineModel>? _medicinesCache;
 
-  Future<T> _simulateLatency<T>(T Function() body,
-      {int ms = 600}) async {
+  Future<T> _simulateLatency<T>(T Function() body, {int ms = 600}) async {
     await Future.delayed(Duration(milliseconds: ms));
     return body();
   }
@@ -219,7 +213,11 @@ class MockApiService {
         frequency: frequency,
         reminderTimes: reminderTimes,
         startDate: DateTime.now().toIso8601String().split('T').first,
-        endDate: DateTime.now().add(const Duration(days: 7)).toIso8601String().split('T').first,
+        endDate: DateTime.now()
+            .add(const Duration(days: 7))
+            .toIso8601String()
+            .split('T')
+            .first,
         instructions: instructions,
         isActive: true,
         adherenceLog: [],

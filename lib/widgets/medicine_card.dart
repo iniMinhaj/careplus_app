@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
-import '../theme/app_theme.dart';
+import '../core/theme/app_theme.dart';
 
 class MedicineCard extends StatelessWidget {
   final MedicineModel medicine;
@@ -10,7 +10,8 @@ class MedicineCard extends StatelessWidget {
 
   bool _takenToday(String time) {
     final today = DateTime.now().toIso8601String().split('T').first;
-    return medicine.adherenceLog.any((l) => l.date == today && l.time == time && l.taken);
+    return medicine.adherenceLog
+        .any((l) => l.date == today && l.time == time && l.taken);
   }
 
   @override
@@ -33,22 +34,28 @@ class MedicineCard extends StatelessWidget {
                   color: AppColors.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.medication_outlined, color: AppColors.primary),
+                child: const Icon(Icons.medication_outlined,
+                    color: AppColors.primary),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(medicine.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
-                    Text('${medicine.dosage} · ${medicine.frequency.replaceAll('_', ' ')}',
-                        style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                    Text(medicine.name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 15)),
+                    Text(
+                        '${medicine.dosage} · ${medicine.frequency.replaceAll('_', ' ')}',
+                        style: const TextStyle(
+                            color: AppColors.textSecondary, fontSize: 12)),
                   ],
                 ),
               ),
               if (!medicine.isActive)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: AppColors.border,
                     borderRadius: BorderRadius.circular(20),
@@ -58,7 +65,9 @@ class MedicineCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          Text(medicine.instructions, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+          Text(medicine.instructions,
+              style: const TextStyle(
+                  fontSize: 12, color: AppColors.textSecondary)),
           if (medicine.isActive) ...[
             const SizedBox(height: 10),
             Wrap(

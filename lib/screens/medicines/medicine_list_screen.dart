@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/models.dart';
-import '../../services/mock_api_service.dart';
-import '../../theme/app_theme.dart';
+import '../../core/network/mock_api_service.dart';
+import '../../core/theme/app_theme.dart';
 import '../../widgets/medicine_card.dart';
 import '../../widgets/common_widgets.dart';
 import 'add_medicine_screen.dart';
@@ -72,7 +72,8 @@ class _MedicineListScreenState extends State<MedicineListScreen> {
       body: _isLoading
           ? const LoadingView()
           : _hasError
-              ? ErrorView(message: 'Could not load medicines', onRetry: _loadMedicines)
+              ? ErrorView(
+                  message: 'Could not load medicines', onRetry: _loadMedicines)
               : RefreshIndicator(
                   onRefresh: _loadMedicines,
                   child: ListView(
@@ -90,13 +91,21 @@ class _MedicineListScreenState extends State<MedicineListScreen> {
                             const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Today's Adherence", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                                Text("Today's Adherence",
+                                    style: TextStyle(
+                                        color: Colors.white70, fontSize: 12)),
                                 SizedBox(height: 4),
-                                Text('Keep it up!', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+                                Text('Keep it up!',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700)),
                               ],
                             ),
                             Text('$_adherencePercent%',
-                                style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w800)),
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.w800)),
                           ],
                         ),
                       ),
@@ -104,7 +113,9 @@ class _MedicineListScreenState extends State<MedicineListScreen> {
                       if (_medicines.isEmpty)
                         const Padding(
                           padding: EdgeInsets.only(top: 60),
-                          child: EmptyView(message: 'No medicines added yet', icon: Icons.medication_outlined),
+                          child: EmptyView(
+                              message: 'No medicines added yet',
+                              icon: Icons.medication_outlined),
                         )
                       else
                         ..._medicines.map((med) => Padding(
