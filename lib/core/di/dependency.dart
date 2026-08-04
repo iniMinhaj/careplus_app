@@ -13,12 +13,15 @@ import '../../features/auth/domain/usecase/register_usecase.dart';
 import '../../features/auth/domain/usecase/request_otp_usecase.dart';
 import '../../features/auth/domain/usecase/verify_otp_usecase.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
+import '../../features/profile/domain/usecase/get_profile_usecase.dart';
+import '../../features/profile/presentation/bloc/profile_bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
 Future<void> setupDependencies() async {
   _registerCore();
   _registerAuthModule();
+  _registerProfileModule();
 }
 
 void _registerCore() {
@@ -64,4 +67,12 @@ void _registerAuthModule() {
       checkAuthStatusUsecase: sl(),
     ),
   );
+}
+
+void _registerProfileModule() {
+  // Usecase — reuses AuthRepository, no dedicated ProfileRepository
+  sl.registerLazySingleton(() => GetProfileUsecase(authRepository: sl()));
+
+  // Bloc — screen-scoped, unlike AuthBloc nothing outside the Profile tab needs it
+  sl.registerFactory(() => ProfileBloc(getProfileUsecase: sl()));
 }
