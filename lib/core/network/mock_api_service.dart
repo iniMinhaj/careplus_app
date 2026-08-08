@@ -1,13 +1,18 @@
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 import '../../models/models.dart';
+import '../storage/local_json_store.dart';
+import 'mock_api_client.dart';
 
 class MockApiService {
   MockApiService._internal();
   static final MockApiService instance = MockApiService._internal();
 
-  // in-memory mutable copies so booking / marking-taken feel "real" during the demo
-  List<AppointmentModel>? _appointmentsCache;
+  // Same writable-copy-backed client the migrated features/* modules use, so
+  // an appointment booked through the new BookingBloc flow and one read here
+  // (still legacy, setState-based) see the same persisted data.
+  final MockApiClient _apiClient = MockApiClient(store: FileLocalJsonStore());
+
+  // in-memory mutable copy so marking a medicine as taken feels "real" during
+  // the demo — appointments no longer cache in memory, see getAppointments().
   List<MedicineModel>? _medicinesCache;
 
   Future<T> _simulateLatency<T>(T Function() body, {int ms = 600}) async {
@@ -15,10 +20,8 @@ class MockApiService {
     return body();
   }
 
-  Future<Map<String, dynamic>> _loadJson(String fileName) async {
-    final raw = await rootBundle.loadString('assets/mock/$fileName');
-    return jsonDecode(raw) as Map<String, dynamic>;
-  }
+  Future<Map<String, dynamic>> _loadJson(String fileName) =>
+      _apiClient.load(fileName, latencyMs: 0);
 
   // ---------------- AUTH ----------------
 
@@ -100,16 +103,10 @@ class MockApiService {
   // ---------------- APPOINTMENTS ----------------
 
   Future<List<AppointmentModel>> getAppointments() async {
-    if (_appointmentsCache != null) {
-      return _simulateLatency(() => _appointmentsCache!, ms: 300);
-    }
     final json = await _loadJson('appointments.json');
-    return _simulateLatency(() {
-      _appointmentsCache = (json['appointments'] as List)
-          .map((e) => AppointmentModel.fromJson(e))
-          .toList();
-      return _appointmentsCache!;
-    });
+    return _simulateLatency(() => (json['appointments'] as List)
+        .map((e) => AppointmentModel.fromJson(e))
+        .toList());
   }
 
   Future<AppointmentModel> bookAppointment({
@@ -120,55 +117,49 @@ class MockApiService {
     required String reasonForVisit,
     required String paymentMethod,
   }) async {
-    await getAppointments(); // ensure cache warm
-    return _simulateLatency(() {
-      final newAppt = AppointmentModel(
-        id: 'appt_${DateTime.now().millisecondsSinceEpoch}',
-        patientId: 'usr_001',
-        doctorId: doctor.id,
-        doctorName: doctor.name,
-        doctorPhotoUrl: doctor.photoUrl,
-        specializationName: doctor.specializationName,
-        date: date,
-        time: time,
-        status: 'upcoming',
-        fee: doctor.consultationFee,
-        currency: doctor.currency,
-        paymentStatus: 'paid',
-        paymentMethod: paymentMethod,
-        consultationType: consultationType,
-        reasonForVisit: reasonForVisit,
-      );
-      _appointmentsCache = [newAppt, ..._appointmentsCache!];
-      return newAppt;
-    }, ms: 900);
+    final json = await _loadJson('appointments.json');
+    final appointments =
+        (json['appointments'] as List).cast<Map<String, dynamic>>();
+    await Future.delayed(const Duration(milliseconds: 900));
+    final newApptJson = <String, dynamic>{
+      'id': 'appt_${DateTime.now().millisecondsSinceEpoch}',
+      'patientId': 'usr_001',
+      'doctorId': doctor.id,
+      'doctorName': doctor.name,
+      'doctorPhotoUrl': doctor.photoUrl,
+      'specializationName': doctor.specializationName,
+      'date': date,
+      'time': time,
+      'status': 'upcoming',
+      'fee': doctor.consultationFee,
+      'currency': doctor.currency,
+      'paymentStatus': 'paid',
+      'paymentMethod': paymentMethod,
+      'consultationType': consultationType,
+      'reasonForVisit': reasonForVisit,
+      'createdAt': DateTime.now().toUtc().toIso8601String(),
+    };
+    await _apiClient.save('appointments.json', {
+      ...json,
+      'appointments': [newApptJson, ...appointments],
+    });
+    return AppointmentModel.fromJson(newApptJson);
   }
 
   Future<void> cancelAppointment(String id) async {
-    await getAppointments();
-    return _simulateLatency(() {
-      _appointmentsCache = _appointmentsCache!.map((a) {
-        if (a.id == id) {
-          return AppointmentModel(
-            id: a.id,
-            patientId: a.patientId,
-            doctorId: a.doctorId,
-            doctorName: a.doctorName,
-            doctorPhotoUrl: a.doctorPhotoUrl,
-            specializationName: a.specializationName,
-            date: a.date,
-            time: a.time,
-            status: 'cancelled',
-            fee: a.fee,
-            currency: a.currency,
-            paymentStatus: 'refunded',
-            paymentMethod: a.paymentMethod,
-            consultationType: a.consultationType,
-            reasonForVisit: a.reasonForVisit,
-          );
-        }
-        return a;
-      }).toList();
+    final json = await _loadJson('appointments.json');
+    final appointments =
+        (json['appointments'] as List).cast<Map<String, dynamic>>();
+    await Future.delayed(const Duration(milliseconds: 300));
+    final updated = appointments.map((a) {
+      if (a['id'] == id) {
+        return {...a, 'status': 'cancelled', 'paymentStatus': 'refunded'};
+      }
+      return a;
+    }).toList();
+    await _apiClient.save('appointments.json', {
+      ...json,
+      'appointments': updated,
     });
   }
 

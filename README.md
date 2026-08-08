@@ -85,7 +85,7 @@ lib/
 |---|---|---|
 | Auth | `setState` | MVP |
 | Doctor Discovery | `setState` | MVP |
-| Booking | `setState` | MVP |
+| Booking | `bloc` | Clean Architecture |
 | Health Records | `setState` | MVP |
 | Medicine Reminder | `setState` | MVP |
 | Profile | `setState` | MVP |

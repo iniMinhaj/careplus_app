@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/models.dart';
+import '../../core/di/dependency.dart';
 import '../../core/network/mock_api_service.dart';
 import '../../core/theme/app_theme.dart';
 import '../../widgets/common_widgets.dart';
-import '../booking/booking_confirm_screen.dart';
+import '../../features/booking/presentation/bloc/booking_bloc.dart';
+import '../../features/booking/presentation/bloc/booking_event.dart';
+import '../../features/booking/presentation/screens/booking_confirm_screen.dart';
 
 class DoctorDetailScreen extends StatefulWidget {
   final String doctorId;
@@ -186,10 +190,20 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                 : () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => BookingConfirmScreen(
-                          doctor: doctor,
-                          date: doctor.availableSlots[_selectedDateIndex].date,
-                          time: _selectedSlot!,
+                        builder: (_) => BlocProvider(
+                          create: (_) => sl<BookingBloc>()
+                            ..add(BookingStarted(
+                              doctorId: doctor.id,
+                              doctorName: doctor.name,
+                              doctorPhotoUrl: doctor.photoUrl,
+                              specializationName: doctor.specializationName,
+                              consultationFee: doctor.consultationFee,
+                              currency: doctor.currency,
+                              date: doctor
+                                  .availableSlots[_selectedDateIndex].date,
+                              time: _selectedSlot!,
+                            )),
+                          child: const BookingConfirmScreen(),
                         ),
                       ),
                     ),
