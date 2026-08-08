@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/models.dart';
-import '../core/theme/app_theme.dart';
+
+import '../../../../core/theme/app_theme.dart';
+import '../../domain/entity/specialization.dart';
 
 class SpecializationChip extends StatelessWidget {
-  final SpecializationModel specialization;
+  final Specialization specialization;
   final bool selected;
   final VoidCallback onTap;
 
