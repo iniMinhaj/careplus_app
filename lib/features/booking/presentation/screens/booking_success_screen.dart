@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../models/models.dart';
-import '../../core/theme/app_theme.dart';
-import '../home/main_shell.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/theme/app_theme.dart';
+import '../../../../screens/home/main_shell.dart';
+import '../bloc/booking_bloc.dart';
 
 class BookingSuccessScreen extends StatelessWidget {
-  final AppointmentModel appointment;
-  const BookingSuccessScreen({super.key, required this.appointment});
+  const BookingSuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appointment = context.read<BookingBloc>().state.appointment!;
     return Scaffold(
       body: SafeArea(
         child: Padding(

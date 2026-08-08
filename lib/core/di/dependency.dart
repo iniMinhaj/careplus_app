@@ -2,6 +2,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
 import '../network/mock_api_client.dart';
+import '../storage/local_json_store.dart';
 import '../storage/token_manager.dart';
 import '../../features/auth/data/datasources/remote/auth_remote_datasource.dart';
 import '../../features/auth/data/repository/auth_repo_impl.dart';
@@ -22,6 +23,11 @@ import '../../features/home/domain/usecase/get_doctors_usecase.dart';
 import '../../features/home/domain/usecase/get_specializations_usecase.dart';
 import '../../features/home/presentation/bloc/doctor_list/doctor_list_bloc.dart';
 import '../../features/home/presentation/bloc/specialization/specialization_bloc.dart';
+import '../../features/booking/data/datasources/remote/booking_remote_datasource.dart';
+import '../../features/booking/data/repository/booking_repository_impl.dart';
+import '../../features/booking/domain/repository/booking_repository.dart';
+import '../../features/booking/domain/usecase/book_appointment_usecase.dart';
+import '../../features/booking/presentation/bloc/booking_bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -30,13 +36,15 @@ Future<void> setupDependencies() async {
   _registerAuthModule();
   _registerProfileModule();
   _registerHomeModule();
+  _registerBookingModule();
 }
 
 void _registerCore() {
   sl.registerLazySingleton<FlutterSecureStorage>(
     () => const FlutterSecureStorage(),
   );
-  sl.registerLazySingleton<MockApiClient>(() => MockApiClient());
+  sl.registerLazySingleton<LocalJsonStore>(() => FileLocalJsonStore());
+  sl.registerLazySingleton<MockApiClient>(() => MockApiClient(store: sl()));
 }
 
 void _registerAuthModule() {
@@ -103,4 +111,22 @@ void _registerHomeModule() {
     () => SpecializationBloc(getSpecializationsUsecase: sl()),
   );
   sl.registerFactory(() => DoctorListBloc(getDoctorsUsecase: sl()));
+}
+
+void _registerBookingModule() {
+  // Data sources / repository
+  sl.registerLazySingleton<BookingRemoteDataSource>(
+    () => BookingRemoteDataSourceImpl(apiClient: sl()),
+  );
+  sl.registerLazySingleton<BookingRepository>(
+    () => BookingRepositoryImpl(bookingRemoteDataSource: sl()),
+  );
+
+  // Usecase
+  sl.registerLazySingleton(() => BookAppointmentUsecase(repository: sl()));
+
+  // Bloc — one instance per booking flow, created when a slot is picked
+  sl.registerFactory(
+    () => BookingBloc(bookAppointmentUsecase: sl()),
+  );
 }

@@ -20,7 +20,9 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, User>> getCurrentUser() async {
     try {
-      final userModel = await _authRemoteDataSource.getCurrentUser();
+      final userId = await _tokenManager.getUserId();
+      final userModel =
+          await _authRemoteDataSource.getCurrentUser(userId: userId);
       return Right(userModel.toEntity());
     } catch (e) {
       return Left(ErrorHandler.handle(e.toString()));
@@ -45,7 +47,10 @@ class AuthRepositoryImpl implements AuthRepository {
           await _authRemoteDataSource.login(email: email, password: password);
       await _tokenManager.saveTokens(accessToken: authResponse.accessToken);
       final user = authResponse.user.toEntity();
+      await _tokenManager.saveUserId(user.id);
       return Right(user);
+    } on InvalidCredentialsException {
+      return const Left(AuthFailure(message: 'Invalid email or password'));
     } catch (e) {
       return Left(ErrorHandler.handle(e.toString()));
     }
@@ -71,6 +76,9 @@ class AuthRepositoryImpl implements AuthRepository {
       final registerResponse = await _authRemoteDataSource.register(
           name: name, email: email, phone: phone, password: password);
       return Right(registerResponse.toEntity());
+    } on EmailAlreadyInUseException {
+      return const Left(
+          ClientFailure(message: 'An account with this email already exists'));
     } catch (e) {
       return Left(ErrorHandler.handle(e.toString()));
     }

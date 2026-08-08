@@ -6,6 +6,8 @@ abstract interface class TokenManager {
   Future<void> saveTokens({required String accessToken});
   Future<String?> getAccessToken();
   Future<bool> hasStoredToken();
+  Future<void> saveUserId(String userId);
+  Future<String?> getUserId();
   Future<void> clearTokens();
 }
 
@@ -14,6 +16,7 @@ class SecureTokenManager implements TokenManager {
   const SecureTokenManager(this._storage);
 
   static const _accessTokenKey = 'access_token';
+  static const _userIdKey = 'user_id';
 
   @override
   Future<void> saveTokens({
@@ -32,7 +35,16 @@ class SecureTokenManager implements TokenManager {
   }
 
   @override
+  Future<void> saveUserId(String userId) async {
+    await _storage.write(key: _userIdKey, value: userId);
+  }
+
+  @override
+  Future<String?> getUserId() => _storage.read(key: _userIdKey);
+
+  @override
   Future<void> clearTokens() async {
     await _storage.delete(key: _accessTokenKey);
+    await _storage.delete(key: _userIdKey);
   }
 }
