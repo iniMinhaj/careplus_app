@@ -15,6 +15,13 @@ import '../../features/auth/domain/usecase/verify_otp_usecase.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/profile/domain/usecase/get_profile_usecase.dart';
 import '../../features/profile/presentation/bloc/profile_bloc.dart';
+import '../../features/home/data/datasources/remote/home_remote_datasource.dart';
+import '../../features/home/data/repository/home_repository_impl.dart';
+import '../../features/home/domain/repository/home_repository.dart';
+import '../../features/home/domain/usecase/get_doctors_usecase.dart';
+import '../../features/home/domain/usecase/get_specializations_usecase.dart';
+import '../../features/home/presentation/bloc/doctor_list/doctor_list_bloc.dart';
+import '../../features/home/presentation/bloc/specialization/specialization_bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -22,6 +29,7 @@ Future<void> setupDependencies() async {
   _registerCore();
   _registerAuthModule();
   _registerProfileModule();
+  _registerHomeModule();
 }
 
 void _registerCore() {
@@ -75,4 +83,24 @@ void _registerProfileModule() {
 
   // Bloc — screen-scoped, unlike AuthBloc nothing outside the Profile tab needs it
   sl.registerFactory(() => ProfileBloc(getProfileUsecase: sl()));
+}
+
+void _registerHomeModule() {
+  // Data sources / repository
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(apiClient: sl()),
+  );
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(homeRemoteDataSource: sl()),
+  );
+
+  // Usecases
+  sl.registerLazySingleton(() => GetSpecializationsUsecase(repository: sl()));
+  sl.registerLazySingleton(() => GetDoctorsUsecase(repository: sl()));
+
+  // Blocs — screen-scoped, kept alive by MainShell's IndexedStack for the tab's lifetime
+  sl.registerFactory(
+    () => SpecializationBloc(getSpecializationsUsecase: sl()),
+  );
+  sl.registerFactory(() => DoctorListBloc(getDoctorsUsecase: sl()));
 }
