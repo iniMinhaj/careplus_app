@@ -143,6 +143,7 @@ class _SlotCalendarState extends State<SlotCalendar> {
             return Padding(
               padding: const EdgeInsets.all(3),
               child: InkWell(
+                key: Key('slot-date-$iso'),
                 onTap: isSelectable ? () => widget.onDateSelected(iso) : null,
                 borderRadius: BorderRadius.circular(20),
                 child: Container(

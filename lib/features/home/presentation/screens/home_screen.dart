@@ -110,6 +110,7 @@ class _HomeViewState extends State<_HomeView> {
               children: [
                 Expanded(
                   child: TextField(
+                    key: const Key('home-search-field'),
                     controller: _searchController,
                     onChanged: (query) => context
                         .read<DoctorListBloc>()
@@ -237,6 +238,7 @@ class _DoctorList extends StatelessWidget {
               itemBuilder: (context, index) {
                 final doctor = state.doctors[index];
                 return DoctorCard(
+                  key: Key('doctor-card-${doctor.id}'),
                   doctor: doctor,
                   onTap: () => context
                       .push(AppRoutes.doctorDetailPath(doctor.id)),

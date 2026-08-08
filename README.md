@@ -45,6 +45,10 @@ lib/features/<feature>/
 
 **Why this matters in practice:** presentation code never imports `data/`, and `domain/` never imports Flutter. A `BookingBloc` depends on `BookAppointmentUsecase`, which depends on the abstract `BookingRepository` — not on Dio, not on JSON, not on a mock file path. That seam is what makes "swap the mock backend for a real API" a one-file change per feature (see [Networking Strategy](#-networking-strategy-mock-today-real-tomorrow)) instead of a rewrite.
 
+### Navigation
+
+Routing is centralized in `GoRouter` (`lib/core/router/app_router.dart`), with the four main tabs — home, appointments, medicines, profile — living under a `StatefulShellRoute.indexedStack` so each tab keeps its own navigation stack and state alive when switching between them (`lib/widgets/main_shell.dart`). Auth-gated redirects are driven by `GoRouterRefreshStream`, a small `Listenable` adapter that re-runs the router's `redirect` callback whenever `AuthBloc`'s stream emits — e.g. bouncing an already-authenticated user off `/login`/`/register` — rather than only reacting to explicit navigation calls. All route paths are centralized as constants in `app_routes.dart` so a path is never hand-typed at more than one call site.
+
 ### Dependency Injection
 
 A single `get_it` container (`lib/core/di/dependency.dart`) wires every layer, with one `_register<Feature>Module()` function per feature and a clear, deliberate lifetime policy:
@@ -88,6 +92,12 @@ flutter test
 
 Coverage spans usecases (business-rule correctness), repositories (exception → `Failure` mapping), datasources (mock-layer contract behavior), and blocs (exact state-sequence assertions via `bloc_test`, including the debounced-search race-condition tests in `DoctorListBloc` — verifying that a stale, slower response never overwrites a newer one). Mocking is done with `mocktail` against the abstract domain contracts, never against concrete implementations.
 
+On top of that, [integration_test/](integration_test/) exercises the real `GoRouter` navigation graph end-to-end — unauthenticated launch redirect, register → OTP → role-select → shell handoff, the full booking flow, and logout — against real widgets and real routing, not mocked navigation:
+
+```
+flutter test integration_test
+```
+
 ---
 
 ## 🛠️ Tech Stack
@@ -105,7 +115,8 @@ Coverage spans usecases (business-rule correctness), repositories (exception →
 | File picking | `file_picker` (real device picker for prescriptions/reports) |
 | Local notifications | `flutter_local_notifications` + `timezone` + `flutter_timezone` (real scheduled daily medicine reminders) |
 | Responsive UI | `flutter_screenutil` |
-| Testing | `flutter_test`, `bloc_test`, `mocktail` |
+| Navigation | `go_router` (`StatefulShellRoute` tab shell, auth-aware redirects) |
+| Testing | `flutter_test`, `bloc_test`, `mocktail`, `integration_test` |
 
 ---
 
@@ -128,18 +139,20 @@ Realistic fixture data lives in [assets/mock/](assets/mock/), shaped like real A
 
 ```
 lib/
-├── main.dart                       # bootstrap: DI, notification init, MaterialApp
+├── main.dart                       # bootstrap: DI, notification init, MaterialApp.router
 ├── core/
 │   ├── di/                          # get_it composition root
 │   ├── error/                       # Failure hierarchy, ErrorHandler, structured AppLogger
 │   ├── network/                     # MockApiClient (the Dio-shaped seam)
 │   ├── notifications/                # NotificationService (flutter_local_notifications wrapper)
+│   ├── router/                       # GoRouter config — route paths, StatefulShellRoute tab shell, auth-aware redirects
 │   ├── storage/                      # LocalJsonStore, secure TokenManager
 │   ├── theme/                        # colors, text styles, ThemeData
 │   ├── usecase/                      # UseCase<Type, Params> base contract
 │   └── utils/                        # debounce EventTransformer, etc.
 ├── features/
 │   ├── auth/                         # login, register, OTP, role select
+│   ├── splash/                       # launch screen, initial route target
 │   ├── home/                         # specializations + doctor search/filter (debounced)
 │   ├── doctor_detail/                 # bio, languages, reviews, interactive calendar
 │   ├── booking/                       # confirm → dummy payment → success
@@ -147,8 +160,7 @@ lib/
 │   ├── health_records/                # upload, list, detail viewer
 │   ├── medicine/                      # reminders, notifications, adherence history
 │   └── profile/                       # view/edit profile, payment history
-├── screens/                          # app shell only (bottom nav, splash) — not business logic
-└── widgets/                          # shared, stateless, reusable UI (Loading/Error/Empty views)
+└── widgets/                          # shared UI — MainShell (StatefulShellRoute bottom-nav) + Loading/Error/Empty views
 ```
 
 ---
@@ -188,7 +200,6 @@ No environment variables, API keys, or backend setup required — the app runs f
 ## 🗺️ Roadmap
 
 - Swap `MockApiClient` for a real `Dio` + REST/GraphQL backend, one datasource at a time, behind the existing repository contracts
-- `GoRouter` + `StatefulShellRoute` for centralized, deep-linkable navigation (currently `MaterialApp.routes` + ad hoc `Navigator.push`)
 - Real-time video for the "Join Call" flow
 - AI symptom checker (fixture data already seeded)
 - CI pipeline running `flutter analyze` + `flutter test` on every PR

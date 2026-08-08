@@ -123,6 +123,7 @@ class BookingPaymentScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
+                  key: const Key('pay-button'),
                   onPressed: isProcessing
                       ? null
                       : () => context

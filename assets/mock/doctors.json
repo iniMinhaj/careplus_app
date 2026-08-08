@@ -18,9 +18,9 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": true,
       "availableSlots": [
-        { "date": "2026-07-26", "slots": ["10:00 AM", "10:30 AM", "11:00 AM", "04:00 PM", "04:30 PM"] },
-        { "date": "2026-07-27", "slots": ["09:00 AM", "09:30 AM", "05:00 PM"] },
-        { "date": "2026-07-28", "slots": ["10:00 AM", "11:30 AM", "03:00 PM"] }
+        { "date": "2026-08-15", "slots": ["10:00 AM", "10:30 AM", "11:00 AM", "04:00 PM", "04:30 PM"] },
+        { "date": "2026-08-16", "slots": ["09:00 AM", "09:30 AM", "05:00 PM"] },
+        { "date": "2026-08-17", "slots": ["10:00 AM", "11:30 AM", "03:00 PM"] }
       ],
       "reviews": [
         { "id": "rev_001_1", "reviewerName": "Mahin Rahman", "rating": 5.0, "comment": "Very attentive and explained my heart condition thoroughly. Highly recommend.", "date": "2026-07-10" },
@@ -46,8 +46,8 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": false,
       "availableSlots": [
-        { "date": "2026-07-27", "slots": ["11:00 AM", "11:30 AM", "12:00 PM"] },
-        { "date": "2026-07-29", "slots": ["09:00 AM", "09:30 AM"] }
+        { "date": "2026-08-16", "slots": ["11:00 AM", "11:30 AM", "12:00 PM"] },
+        { "date": "2026-08-18", "slots": ["09:00 AM", "09:30 AM"] }
       ],
       "reviews": [
         { "id": "rev_002_1", "reviewerName": "Shirin Akter", "rating": 4.0, "comment": "Knowledgeable doctor, though the clinic was a bit crowded.", "date": "2026-07-05" },
@@ -72,8 +72,8 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": true,
       "availableSlots": [
-        { "date": "2026-07-26", "slots": ["01:00 PM", "01:30 PM", "02:00 PM"] },
-        { "date": "2026-07-28", "slots": ["10:00 AM", "10:30 AM"] }
+        { "date": "2026-08-15", "slots": ["01:00 PM", "01:30 PM", "02:00 PM"] },
+        { "date": "2026-08-17", "slots": ["10:00 AM", "10:30 AM"] }
       ],
       "reviews": [
         { "id": "rev_003_1", "reviewerName": "Farzana Sultana", "rating": 5.0, "comment": "My acne cleared up within a month of her treatment plan.", "date": "2026-07-12" },
@@ -99,8 +99,8 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": true,
       "availableSlots": [
-        { "date": "2026-07-26", "slots": ["09:00 AM", "09:30 AM"] },
-        { "date": "2026-07-30", "slots": ["02:00 PM", "02:30 PM", "03:00 PM"] }
+        { "date": "2026-08-15", "slots": ["09:00 AM", "09:30 AM"] },
+        { "date": "2026-08-19", "slots": ["02:00 PM", "02:30 PM", "03:00 PM"] }
       ],
       "reviews": [
         { "id": "rev_004_1", "reviewerName": "Jasim Uddin", "rating": 5.0, "comment": "He correctly diagnosed my migraine triggers when others couldn't.", "date": "2026-07-18" },
@@ -127,7 +127,7 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": true,
       "availableSlots": [
-        { "date": "2026-07-26", "slots": ["11:00 AM", "11:30 AM", "12:00 PM"] }
+        { "date": "2026-08-15", "slots": ["11:00 AM", "11:30 AM", "12:00 PM"] }
       ],
       "reviews": [
         { "id": "rev_005_1", "reviewerName": "Nasrin Sultana", "rating": 5.0, "comment": "My daughter loves visiting her, very gentle with kids.", "date": "2026-07-14" },
@@ -152,7 +152,7 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": false,
       "availableSlots": [
-        { "date": "2026-07-29", "slots": ["10:00 AM", "10:30 AM"] }
+        { "date": "2026-08-18", "slots": ["10:00 AM", "10:30 AM"] }
       ],
       "reviews": [
         { "id": "rev_006_1", "reviewerName": "Sohel Rana", "rating": 4.0, "comment": "Fixed my knee injury with a solid rehab plan.", "date": "2026-07-08" },
@@ -178,7 +178,7 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": true,
       "availableSlots": [
-        { "date": "2026-07-26", "slots": ["03:00 PM", "03:30 PM", "04:00 PM"] }
+        { "date": "2026-08-15", "slots": ["03:00 PM", "03:30 PM", "04:00 PM"] }
       ],
       "reviews": [
         { "id": "rev_007_1", "reviewerName": "Ruma Begum", "rating": 5.0, "comment": "Made me feel comfortable throughout my pregnancy checkups.", "date": "2026-07-16" },
@@ -204,7 +204,7 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": true,
       "availableSlots": [
-        { "date": "2026-07-26", "slots": ["12:00 PM", "12:30 PM"] }
+        { "date": "2026-08-15", "slots": ["12:00 PM", "12:30 PM"] }
       ],
       "reviews": [
         { "id": "rev_008_1", "reviewerName": "Rakibul Islam", "rating": 4.0, "comment": "Painless root canal treatment, very skilled.", "date": "2026-07-11" },
@@ -229,7 +229,7 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": false,
       "availableSlots": [
-        { "date": "2026-07-28", "slots": ["04:00 PM", "04:30 PM"] }
+        { "date": "2026-08-17", "slots": ["04:00 PM", "04:30 PM"] }
       ],
       "reviews": [
         { "id": "rev_009_1", "reviewerName": "Imran Hossain", "rating": 5.0, "comment": "She helped me a lot with my anxiety, very compassionate.", "date": "2026-07-09" },
@@ -255,7 +255,7 @@
       "languages": ["Bengali", "English"],
       "isAvailableToday": true,
       "availableSlots": [
-        { "date": "2026-07-26", "slots": ["09:00 AM", "09:15 AM", "09:30 AM", "09:45 AM"] }
+        { "date": "2026-08-15", "slots": ["09:00 AM", "09:15 AM", "09:30 AM", "09:45 AM"] }
       ],
       "reviews": [
         { "id": "rev_010_1", "reviewerName": "Aminul Islam", "rating": 4.0, "comment": "Quick and efficient checkup, good general advice.", "date": "2026-07-06" },
