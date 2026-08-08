@@ -28,4 +28,12 @@ abstract interface class AuthRepository {
   Future<Either<Failure, bool>> isLoggedIn();
 
   Future<Either<Failure, User>> getCurrentUser();
+
+  Future<Either<Failure, User>> updateProfile({
+    required String userId,
+    required String name,
+    required String phone,
+    required String bloodGroup,
+    required String address,
+  });
 }

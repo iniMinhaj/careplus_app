@@ -21,6 +21,11 @@
         { "date": "2026-07-26", "slots": ["10:00 AM", "10:30 AM", "11:00 AM", "04:00 PM", "04:30 PM"] },
         { "date": "2026-07-27", "slots": ["09:00 AM", "09:30 AM", "05:00 PM"] },
         { "date": "2026-07-28", "slots": ["10:00 AM", "11:30 AM", "03:00 PM"] }
+      ],
+      "reviews": [
+        { "id": "rev_001_1", "reviewerName": "Mahin Rahman", "rating": 5.0, "comment": "Very attentive and explained my heart condition thoroughly. Highly recommend.", "date": "2026-07-10" },
+        { "id": "rev_001_2", "reviewerName": "Taslima Begum", "rating": 4.5, "comment": "Short wait time and the doctor was very professional.", "date": "2026-06-22" },
+        { "id": "rev_001_3", "reviewerName": "Anisur Rahman", "rating": 5.0, "comment": "Best cardiologist I've visited in Dhaka. My follow-up was smooth as well.", "date": "2026-05-30" }
       ]
     },
     {
@@ -43,6 +48,10 @@
       "availableSlots": [
         { "date": "2026-07-27", "slots": ["11:00 AM", "11:30 AM", "12:00 PM"] },
         { "date": "2026-07-29", "slots": ["09:00 AM", "09:30 AM"] }
+      ],
+      "reviews": [
+        { "id": "rev_002_1", "reviewerName": "Shirin Akter", "rating": 4.0, "comment": "Knowledgeable doctor, though the clinic was a bit crowded.", "date": "2026-07-05" },
+        { "id": "rev_002_2", "reviewerName": "Habibur Rahman", "rating": 4.5, "comment": "Clear explanation of my ECG results and next steps.", "date": "2026-06-15" }
       ]
     },
     {
@@ -65,6 +74,11 @@
       "availableSlots": [
         { "date": "2026-07-26", "slots": ["01:00 PM", "01:30 PM", "02:00 PM"] },
         { "date": "2026-07-28", "slots": ["10:00 AM", "10:30 AM"] }
+      ],
+      "reviews": [
+        { "id": "rev_003_1", "reviewerName": "Farzana Sultana", "rating": 5.0, "comment": "My acne cleared up within a month of her treatment plan.", "date": "2026-07-12" },
+        { "id": "rev_003_2", "reviewerName": "Rezaul Karim", "rating": 4.5, "comment": "Very gentle and patient with my skin allergy concerns.", "date": "2026-06-28" },
+        { "id": "rev_003_3", "reviewerName": "Nabila Islam", "rating": 4.0, "comment": "Good consultation, would visit again.", "date": "2026-05-20" }
       ]
     },
     {
@@ -87,6 +101,12 @@
       "availableSlots": [
         { "date": "2026-07-26", "slots": ["09:00 AM", "09:30 AM"] },
         { "date": "2026-07-30", "slots": ["02:00 PM", "02:30 PM", "03:00 PM"] }
+      ],
+      "reviews": [
+        { "id": "rev_004_1", "reviewerName": "Jasim Uddin", "rating": 5.0, "comment": "He correctly diagnosed my migraine triggers when others couldn't.", "date": "2026-07-18" },
+        { "id": "rev_004_2", "reviewerName": "Salma Khatun", "rating": 5.0, "comment": "Extremely thorough neurological exam, very reassuring.", "date": "2026-07-02" },
+        { "id": "rev_004_3", "reviewerName": "Faruk Ahmed", "rating": 4.5, "comment": "Helped manage my epilepsy medication effectively.", "date": "2026-06-10" },
+        { "id": "rev_004_4", "reviewerName": "Ruma Aktar", "rating": 4.5, "comment": "Great bedside manner and detailed follow-up plan.", "date": "2026-05-25" }
       ]
     },
     {
@@ -108,6 +128,10 @@
       "isAvailableToday": true,
       "availableSlots": [
         { "date": "2026-07-26", "slots": ["11:00 AM", "11:30 AM", "12:00 PM"] }
+      ],
+      "reviews": [
+        { "id": "rev_005_1", "reviewerName": "Nasrin Sultana", "rating": 5.0, "comment": "My daughter loves visiting her, very gentle with kids.", "date": "2026-07-14" },
+        { "id": "rev_005_2", "reviewerName": "Kamal Hossain", "rating": 4.5, "comment": "Great advice on vaccination schedule.", "date": "2026-06-30" }
       ]
     },
     {
@@ -129,6 +153,11 @@
       "isAvailableToday": false,
       "availableSlots": [
         { "date": "2026-07-29", "slots": ["10:00 AM", "10:30 AM"] }
+      ],
+      "reviews": [
+        { "id": "rev_006_1", "reviewerName": "Sohel Rana", "rating": 4.0, "comment": "Fixed my knee injury with a solid rehab plan.", "date": "2026-07-08" },
+        { "id": "rev_006_2", "reviewerName": "Mitu Akter", "rating": 4.5, "comment": "Professional and precise during my joint consultation.", "date": "2026-06-18" },
+        { "id": "rev_006_3", "reviewerName": "Ashraf Ali", "rating": 4.0, "comment": "Good experience overall, slightly long wait.", "date": "2026-05-15" }
       ]
     },
     {
@@ -150,6 +179,11 @@
       "isAvailableToday": true,
       "availableSlots": [
         { "date": "2026-07-26", "slots": ["03:00 PM", "03:30 PM", "04:00 PM"] }
+      ],
+      "reviews": [
+        { "id": "rev_007_1", "reviewerName": "Ruma Begum", "rating": 5.0, "comment": "Made me feel comfortable throughout my pregnancy checkups.", "date": "2026-07-16" },
+        { "id": "rev_007_2", "reviewerName": "Shathi Islam", "rating": 5.0, "comment": "Excellent care and very responsive to questions.", "date": "2026-06-25" },
+        { "id": "rev_007_3", "reviewerName": "Farida Yasmin", "rating": 4.5, "comment": "Highly professional and caring gynecologist.", "date": "2026-05-28" }
       ]
     },
     {
@@ -171,6 +205,10 @@
       "isAvailableToday": true,
       "availableSlots": [
         { "date": "2026-07-26", "slots": ["12:00 PM", "12:30 PM"] }
+      ],
+      "reviews": [
+        { "id": "rev_008_1", "reviewerName": "Rakibul Islam", "rating": 4.0, "comment": "Painless root canal treatment, very skilled.", "date": "2026-07-11" },
+        { "id": "rev_008_2", "reviewerName": "Nadia Afrin", "rating": 4.5, "comment": "Great whitening results, friendly staff too.", "date": "2026-06-12" }
       ]
     },
     {
@@ -192,6 +230,11 @@
       "isAvailableToday": false,
       "availableSlots": [
         { "date": "2026-07-28", "slots": ["04:00 PM", "04:30 PM"] }
+      ],
+      "reviews": [
+        { "id": "rev_009_1", "reviewerName": "Imran Hossain", "rating": 5.0, "comment": "She helped me a lot with my anxiety, very compassionate.", "date": "2026-07-09" },
+        { "id": "rev_009_2", "reviewerName": "Tania Parveen", "rating": 4.5, "comment": "Patient listener and gave practical coping strategies.", "date": "2026-06-20" },
+        { "id": "rev_009_3", "reviewerName": "Rafiqul Islam", "rating": 4.5, "comment": "Great support for my son's adolescent mental health issues.", "date": "2026-05-18" }
       ]
     },
     {
@@ -213,6 +256,10 @@
       "isAvailableToday": true,
       "availableSlots": [
         { "date": "2026-07-26", "slots": ["09:00 AM", "09:15 AM", "09:30 AM", "09:45 AM"] }
+      ],
+      "reviews": [
+        { "id": "rev_010_1", "reviewerName": "Aminul Islam", "rating": 4.0, "comment": "Quick and efficient checkup, good general advice.", "date": "2026-07-06" },
+        { "id": "rev_010_2", "reviewerName": "Shirin Sultana", "rating": 4.0, "comment": "Friendly doctor, straightforward diagnosis.", "date": "2026-06-14" }
       ]
     }
   ]

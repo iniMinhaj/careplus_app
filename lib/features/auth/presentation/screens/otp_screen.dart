@@ -5,6 +5,7 @@ import '../../../../core/theme/app_color.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
 import '../bloc/auth_state.dart';
+import 'role_select_screen.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
@@ -46,7 +47,10 @@ class _OtpScreenState extends State<OtpScreen> {
       listenWhen: (previous, current) =>
           current.status == AuthStatus.otpVerified,
       listener: (context, state) {
-        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const RoleSelectScreen()),
+        );
       },
       builder: (context, state) {
         final isLoading = state.status == AuthStatus.otpVerifying ||

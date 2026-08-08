@@ -105,4 +105,28 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(ErrorHandler.handle(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, User>> updateProfile({
+    required String userId,
+    required String name,
+    required String phone,
+    required String bloodGroup,
+    required String address,
+  }) async {
+    try {
+      final userModel = await _authRemoteDataSource.updateProfile(
+        userId: userId,
+        name: name,
+        phone: phone,
+        bloodGroup: bloodGroup,
+        address: address,
+      );
+      return Right(userModel.toEntity());
+    } on UserNotFoundException {
+      return const Left(ClientFailure(message: 'User not found'));
+    } catch (e) {
+      return Left(ErrorHandler.handle(e.toString()));
+    }
+  }
 }

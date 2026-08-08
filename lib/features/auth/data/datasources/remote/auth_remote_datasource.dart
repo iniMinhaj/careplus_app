@@ -15,6 +15,12 @@ class EmailAlreadyInUseException implements Exception {
   const EmailAlreadyInUseException();
 }
 
+/// Thrown by [AuthRemoteDataSource.updateProfile] when no stored user
+/// matches the submitted id.
+class UserNotFoundException implements Exception {
+  const UserNotFoundException();
+}
+
 abstract interface class AuthRemoteDataSource {
   Future<AuthResponseModel> login(
       {required String email, required String password});
@@ -26,6 +32,13 @@ abstract interface class AuthRemoteDataSource {
   Future<String> requestOtp({required String phone});
   Future<bool> verifyOtp({required String phone, required String otp});
   Future<UserModel> getCurrentUser({String? userId});
+  Future<UserModel> updateProfile({
+    required String userId,
+    required String name,
+    required String phone,
+    required String bloodGroup,
+    required String address,
+  });
 }
 
 class AuthRemoteDataSourcImpl implements AuthRemoteDataSource {
@@ -123,5 +136,38 @@ class AuthRemoteDataSourcImpl implements AuthRemoteDataSource {
       }
     }
     return UserModel.fromJson(match ?? users.first);
+  }
+
+  @override
+  Future<UserModel> updateProfile({
+    required String userId,
+    required String name,
+    required String phone,
+    required String bloodGroup,
+    required String address,
+  }) async {
+    final response = await _apiClient.load('users.json');
+    final users = (response['users'] as List).cast<Map<String, dynamic>>();
+
+    final index = users.indexWhere((user) => user['id'] == userId);
+    if (index == -1) {
+      throw const UserNotFoundException();
+    }
+
+    final updated = <String, dynamic>{
+      ...users[index],
+      'name': name,
+      'phone': phone,
+      'bloodGroup': bloodGroup,
+      'address': address,
+    };
+    users[index] = updated;
+
+    await _apiClient.save('users.json', {
+      ...response,
+      'users': users,
+    });
+
+    return UserModel.fromJson(updated);
   }
 }

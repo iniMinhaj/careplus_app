@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/dependency.dart';
-import '../../../../screens/doctor/doctor_detail_screen.dart';
 import '../../../../widgets/common_widgets.dart';
+import '../../../doctor_detail/presentation/screens/doctor_detail_screen.dart';
 import '../bloc/doctor_list/doctor_list_bloc.dart';
 import '../bloc/doctor_list/doctor_list_event.dart';
 import '../bloc/doctor_list/doctor_list_state.dart';

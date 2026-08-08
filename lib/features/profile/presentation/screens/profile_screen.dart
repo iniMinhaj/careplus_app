@@ -9,8 +9,11 @@ import 'package:careplus/features/auth/presentation/bloc/auth_state.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_event.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_state.dart';
-import 'package:careplus/screens/profile/payment_history_screen.dart';
-import 'package:careplus/screens/records/health_records_screen.dart';
+import 'package:careplus/features/profile/presentation/bloc/payment_history_bloc.dart';
+import 'package:careplus/features/profile/presentation/bloc/payment_history_event.dart';
+import 'package:careplus/features/profile/presentation/screens/edit_profile_screen.dart';
+import 'package:careplus/features/profile/presentation/screens/payment_history_screen.dart';
+import 'package:careplus/features/health_records/presentation/screens/health_records_screen.dart';
 import 'package:careplus/widgets/common_widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -114,7 +117,15 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            final profileBloc = context.read<ProfileBloc>();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => BlocProvider.value(
+                                        value: profileBloc,
+                                        child: const EditProfileScreen())));
+                          },
                           icon: const Icon(Icons.edit_outlined)),
                     ],
                   ),
@@ -129,7 +140,11 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const PaymentHistoryScreen()));
+                            builder: (_) => BlocProvider(
+                                  create: (_) => sl<PaymentHistoryBloc>()
+                                    ..add(const PaymentHistoryRequested()),
+                                  child: const PaymentHistoryScreen(),
+                                )));
                   }),
                   _menuTile(Icons.favorite_border,
                       'Blood Group: ${user.bloodGroup}', null),

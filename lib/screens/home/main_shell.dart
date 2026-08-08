@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
-import '../appointments/appointments_screen.dart';
-import '../medicines/medicine_list_screen.dart';
+import '../../features/appointments/presentation/screens/appointments_screen.dart';
+import '../../features/medicine/presentation/screens/medicine_list_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 
 /// TODO(migration): once on GoRouter + StatefulShellRoute (per your template kit),

@@ -3,6 +3,7 @@ import 'package:careplus/core/error/failures.dart';
 import 'package:careplus/core/usecase/usecase.dart';
 import 'package:careplus/features/auth/domain/entity/user.dart';
 import 'package:careplus/features/profile/domain/usecase/get_profile_usecase.dart';
+import 'package:careplus/features/profile/domain/usecase/update_profile_usecase.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_event.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_state.dart';
@@ -12,8 +13,11 @@ import 'package:mocktail/mocktail.dart';
 
 class MockGetProfileUsecase extends Mock implements GetProfileUsecase {}
 
+class MockUpdateProfileUsecase extends Mock implements UpdateProfileUsecase {}
+
 void main() {
   late MockGetProfileUsecase mockGetProfileUsecase;
+  late MockUpdateProfileUsecase mockUpdateProfileUsecase;
 
   const tUser = User(
     id: 'usr_001',
@@ -34,6 +38,7 @@ void main() {
 
   setUp(() {
     mockGetProfileUsecase = MockGetProfileUsecase();
+    mockUpdateProfileUsecase = MockUpdateProfileUsecase();
   });
 
   blocTest<ProfileBloc, ProfileState>(
@@ -42,7 +47,10 @@ void main() {
       when(() => mockGetProfileUsecase(any()))
           .thenAnswer((_) async => const Right(tUser));
     },
-    build: () => ProfileBloc(getProfileUsecase: mockGetProfileUsecase),
+    build: () => ProfileBloc(
+      getProfileUsecase: mockGetProfileUsecase,
+      updateProfileUsecase: mockUpdateProfileUsecase,
+    ),
     act: (bloc) => bloc.add(const ProfileRequested()),
     expect: () => [
       const ProfileState(status: ProfileStatus.loading),
@@ -56,7 +64,10 @@ void main() {
       when(() => mockGetProfileUsecase(any()))
           .thenAnswer((_) async => const Left(tFailure));
     },
-    build: () => ProfileBloc(getProfileUsecase: mockGetProfileUsecase),
+    build: () => ProfileBloc(
+      getProfileUsecase: mockGetProfileUsecase,
+      updateProfileUsecase: mockUpdateProfileUsecase,
+    ),
     act: (bloc) => bloc.add(const ProfileRequested()),
     expect: () => [
       const ProfileState(status: ProfileStatus.loading),
