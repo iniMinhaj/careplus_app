@@ -1,8 +1,9 @@
 import 'package:careplus/features/booking/domain/entity/appointment.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_color.dart';
-import 'join_call_placeholder_screen.dart';
 
 class AppointmentDetailScreen extends StatelessWidget {
   final Appointment appointment;
@@ -100,15 +101,10 @@ class AppointmentDetailScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => JoinCallPlaceholderScreen(
-                          doctorName: appointment.doctorName,
-                        ),
-                      ),
-                    );
-                  },
+                  onPressed: () => context.push(
+                    AppRoutes.joinCall,
+                    extra: appointment.doctorName,
+                  ),
                   icon: const Icon(Icons.videocam_outlined),
                   label: const Text('Join Call'),
                   style: ElevatedButton.styleFrom(

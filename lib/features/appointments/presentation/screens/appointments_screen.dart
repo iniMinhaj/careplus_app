@@ -1,15 +1,16 @@
 import 'package:careplus/features/booking/domain/entity/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/di/dependency.dart';
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_color.dart';
 import '../../../../widgets/common_widgets.dart';
 import '../bloc/appointment_list_bloc.dart';
 import '../bloc/appointment_list_event.dart';
 import '../bloc/appointment_list_state.dart';
 import '../widgets/appointment_tile.dart';
-import 'appointment_detail_screen.dart';
 
 class AppointmentsScreen extends StatelessWidget {
   const AppointmentsScreen({super.key});
@@ -178,13 +179,8 @@ class _AppointmentList extends StatelessWidget {
           final appt = appointments[index];
           return AppointmentTile(
             appointment: appt,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => AppointmentDetailScreen(appointment: appt),
-                ),
-              );
-            },
+            onTap: () =>
+                context.push(AppRoutes.appointmentDetail, extra: appt),
             onCancel:
                 showCancel ? () => _confirmCancel(context, appt) : null,
           );

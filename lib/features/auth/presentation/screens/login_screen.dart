@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_color.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
@@ -43,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
       listenWhen: (previous, current) =>
           current.status == AuthStatus.authenticated,
       listener: (context, state) {
-        Navigator.pushReplacementNamed(context, '/home');
+        context.go(AppRoutes.home);
       },
       builder: (context, state) {
         final isLoading = state.status == AuthStatus.loading;
@@ -122,8 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 16),
                     Center(
                       child: TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/register'),
+                        onPressed: () => context.push(AppRoutes.register),
                         child: const Text("Don't have an account? Register"),
                       ),
                     ),

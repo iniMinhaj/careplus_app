@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/di/dependency.dart';
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../widgets/common_widgets.dart';
 import '../../../booking/presentation/bloc/booking_bloc.dart';
 import '../../../booking/presentation/bloc/booking_event.dart';
-import '../../../booking/presentation/screens/booking_confirm_screen.dart';
 import '../../domain/entity/doctor_detail.dart';
 import '../bloc/doctor_detail_bloc.dart';
 import '../bloc/doctor_detail_event.dart';
@@ -82,25 +83,21 @@ class _DoctorDetailView extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: state.selectedSlot == null || state.selectedDate == null
                     ? null
-                    : () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                              create: (_) => sl<BookingBloc>()
-                                ..add(BookingStarted(
-                                  doctorId: doctor.id,
-                                  doctorName: doctor.name,
-                                  doctorPhotoUrl: doctor.photoUrl,
-                                  specializationName: doctor.specializationName,
-                                  consultationFee: doctor.consultationFee,
-                                  currency: doctor.currency,
-                                  date: state.selectedDate!,
-                                  time: state.selectedSlot!,
-                                )),
-                              child: const BookingConfirmScreen(),
-                            ),
-                          ),
-                        ),
+                    : () {
+                        final bookingBloc = sl<BookingBloc>()
+                          ..add(BookingStarted(
+                            doctorId: doctor.id,
+                            doctorName: doctor.name,
+                            doctorPhotoUrl: doctor.photoUrl,
+                            specializationName: doctor.specializationName,
+                            consultationFee: doctor.consultationFee,
+                            currency: doctor.currency,
+                            date: state.selectedDate!,
+                            time: state.selectedSlot!,
+                          ));
+                        context.push(AppRoutes.bookingConfirm,
+                            extra: bookingBloc);
+                      },
                 child: const Text('Continue to Book'),
               ),
             ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../bloc/booking_bloc.dart';
 import '../bloc/booking_event.dart';
 import '../bloc/booking_state.dart';
-import 'booking_success_screen.dart';
 
 class BookingPaymentScreen extends StatelessWidget {
   const BookingPaymentScreen({super.key});
@@ -35,14 +36,9 @@ class BookingPaymentScreen extends StatelessWidget {
       body: BlocConsumer<BookingBloc, BookingState>(
         listener: (context, state) {
           if (state.status == BookingStatus.success) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                  value: context.read<BookingBloc>(),
-                  child: const BookingSuccessScreen(),
-                ),
-              ),
+            context.pushReplacement(
+              AppRoutes.bookingSuccess,
+              extra: context.read<BookingBloc>(),
             );
           } else if (state.status == BookingStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_color.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
 import '../bloc/auth_state.dart';
-import 'role_select_screen.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
@@ -47,10 +48,7 @@ class _OtpScreenState extends State<OtpScreen> {
       listenWhen: (previous, current) =>
           current.status == AuthStatus.otpVerified,
       listener: (context, state) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const RoleSelectScreen()),
-        );
+        context.pushReplacement(AppRoutes.roleSelect);
       },
       builder: (context, state) {
         final isLoading = state.status == AuthStatus.otpVerifying ||

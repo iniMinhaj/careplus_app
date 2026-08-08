@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
@@ -76,7 +77,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Profile updated successfully')),
           );
-          Navigator.pop(context);
+          context.pop();
         }
       },
       builder: (context, state) {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../bloc/booking_bloc.dart';
 import '../bloc/booking_event.dart';
 import '../bloc/booking_state.dart';
-import 'booking_payment_screen.dart';
 
 class BookingConfirmScreen extends StatefulWidget {
   const BookingConfirmScreen({super.key});
@@ -121,14 +122,9 @@ class _BookingConfirmScreenState extends State<BookingConfirmScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: ElevatedButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                  value: context.read<BookingBloc>(),
-                  child: const BookingPaymentScreen(),
-                ),
-              ),
+            onPressed: () => context.push(
+              AppRoutes.bookingPayment,
+              extra: context.read<BookingBloc>(),
             ),
             child: const Text('Proceed to Payment'),
           ),

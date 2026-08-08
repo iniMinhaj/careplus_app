@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_color.dart';
 
 /// Shown once, right after OTP verification succeeds, before entering the
@@ -13,7 +15,7 @@ class RoleSelectScreen extends StatelessWidget {
   const RoleSelectScreen({super.key});
 
   void _continue(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+    context.go(AppRoutes.home);
   }
 
   @override

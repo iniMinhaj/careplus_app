@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_theme.dart';
 import '../bloc/medicine_bloc.dart';
@@ -81,7 +82,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
           previous.isAdding && !current.isAdding,
       listener: (context, state) {
         if (state.errorMessage == null) {
-          Navigator.pop(context, true);
+          context.pop(true);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.errorMessage!)),

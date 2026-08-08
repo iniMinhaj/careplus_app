@@ -1,15 +1,16 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/di/dependency.dart';
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../widgets/common_widgets.dart';
 import '../../domain/entity/health_record.dart';
 import '../bloc/health_records_bloc.dart';
 import '../bloc/health_records_event.dart';
 import '../bloc/health_records_state.dart';
-import 'record_detail_screen.dart';
 
 const List<String> _recordTypes = [
   'prescription',
@@ -179,11 +180,8 @@ class _HealthRecordsViewState extends State<_HealthRecordsView> {
             itemBuilder: (context, index) {
               final record = filtered[index];
               return ListTile(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => RecordDetailScreen(record: record)),
-                ),
+                onTap: () => context
+                    .push(AppRoutes.healthRecordDetail, extra: record),
                 tileColor: AppColors.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),

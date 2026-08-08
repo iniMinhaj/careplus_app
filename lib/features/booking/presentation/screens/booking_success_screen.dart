@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../screens/home/main_shell.dart';
 import '../bloc/booking_bloc.dart';
 
 class BookingSuccessScreen extends StatelessWidget {
@@ -59,11 +60,7 @@ class BookingSuccessScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => const MainShell()),
-                    (route) => false,
-                  ),
+                  onPressed: () => context.go(AppRoutes.home),
                   child: const Text('Back to Home'),
                 ),
               ),

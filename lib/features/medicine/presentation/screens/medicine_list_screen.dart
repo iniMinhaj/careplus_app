@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/di/dependency.dart';
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../widgets/common_widgets.dart';
 import '../bloc/medicine_bloc.dart';
 import '../bloc/medicine_event.dart';
 import '../bloc/medicine_state.dart';
 import '../widgets/medicine_tile.dart';
-import 'add_medicine_screen.dart';
-import 'adherence_history_screen.dart';
 
 class MedicineListScreen extends StatelessWidget {
   const MedicineListScreen({super.key});
@@ -28,15 +28,7 @@ class _MedicineListView extends StatelessWidget {
 
   Future<void> _onAddMedicine(BuildContext context) async {
     final bloc = context.read<MedicineBloc>();
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => BlocProvider.value(
-          value: bloc,
-          child: const AddMedicineScreen(),
-        ),
-      ),
-    );
+    await context.push(AppRoutes.medicineAdd, extra: bloc);
   }
 
   @override
@@ -50,12 +42,7 @@ class _MedicineListView extends StatelessWidget {
             tooltip: 'Adherence History',
             onPressed: () {
               final medicines = context.read<MedicineBloc>().state.medicines;
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => AdherenceHistoryScreen(medicines: medicines),
-                ),
-              );
+              context.push(AppRoutes.medicineAdherence, extra: medicines);
             },
           ),
         ],

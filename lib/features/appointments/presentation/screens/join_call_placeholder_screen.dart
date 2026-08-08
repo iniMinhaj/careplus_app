@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_color.dart';
 
@@ -49,7 +50,7 @@ class JoinCallPlaceholderScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () => context.pop(),
                   child: const Text('Back to appointment'),
                 ),
               ),

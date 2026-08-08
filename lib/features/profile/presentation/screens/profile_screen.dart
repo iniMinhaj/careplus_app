@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:careplus/core/di/dependency.dart';
+import 'package:careplus/core/router/app_routes.dart';
 import 'package:careplus/core/theme/app_theme.dart';
 import 'package:careplus/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:careplus/features/auth/presentation/bloc/auth_event.dart';
@@ -9,11 +11,6 @@ import 'package:careplus/features/auth/presentation/bloc/auth_state.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_event.dart';
 import 'package:careplus/features/profile/presentation/bloc/profile_state.dart';
-import 'package:careplus/features/profile/presentation/bloc/payment_history_bloc.dart';
-import 'package:careplus/features/profile/presentation/bloc/payment_history_event.dart';
-import 'package:careplus/features/profile/presentation/screens/edit_profile_screen.dart';
-import 'package:careplus/features/profile/presentation/screens/payment_history_screen.dart';
-import 'package:careplus/features/health_records/presentation/screens/health_records_screen.dart';
 import 'package:careplus/widgets/common_widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -68,8 +65,7 @@ class ProfileScreen extends StatelessWidget {
       child: BlocListener<AuthBloc, AuthState>(
         listenWhen: (previous, current) =>
             current.status == AuthStatus.unauthenticated,
-        listener: (context, state) => Navigator.pushNamedAndRemoveUntil(
-            context, '/login', (route) => false),
+        listener: (context, state) => context.go(AppRoutes.login),
         child: Scaffold(
           appBar: AppBar(title: const Text('Profile')),
           body: BlocBuilder<ProfileBloc, ProfileState>(
@@ -117,35 +113,18 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {
-                            final profileBloc = context.read<ProfileBloc>();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => BlocProvider.value(
-                                        value: profileBloc,
-                                        child: const EditProfileScreen())));
-                          },
+                          onPressed: () => context.push(
+                                AppRoutes.profileEdit,
+                                extra: context.read<ProfileBloc>(),
+                              ),
                           icon: const Icon(Icons.edit_outlined)),
                     ],
                   ),
                   const SizedBox(height: 24),
-                  _menuTile(Icons.folder_shared_outlined, 'Health Records', () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const HealthRecordsScreen()));
-                  }),
-                  _menuTile(Icons.receipt_long_outlined, 'Payment History', () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                                  create: (_) => sl<PaymentHistoryBloc>()
-                                    ..add(const PaymentHistoryRequested()),
-                                  child: const PaymentHistoryScreen(),
-                                )));
-                  }),
+                  _menuTile(Icons.folder_shared_outlined, 'Health Records',
+                      () => context.push(AppRoutes.healthRecords)),
+                  _menuTile(Icons.receipt_long_outlined, 'Payment History',
+                      () => context.push(AppRoutes.paymentHistory)),
                   _menuTile(Icons.favorite_border,
                       'Blood Group: ${user.bloodGroup}', null),
                   _menuTile(Icons.location_on_outlined, user.address, null),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/di/dependency.dart';
+import '../../../../core/router/app_routes.dart';
 import '../../../../widgets/common_widgets.dart';
-import '../../../doctor_detail/presentation/screens/doctor_detail_screen.dart';
 import '../bloc/doctor_list/doctor_list_bloc.dart';
 import '../bloc/doctor_list/doctor_list_event.dart';
 import '../bloc/doctor_list/doctor_list_state.dart';
@@ -237,12 +238,8 @@ class _DoctorList extends StatelessWidget {
                 final doctor = state.doctors[index];
                 return DoctorCard(
                   doctor: doctor,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => DoctorDetailScreen(doctorId: doctor.id),
-                    ),
-                  ),
+                  onTap: () => context
+                      .push(AppRoutes.doctorDetailPath(doctor.id)),
                 );
               },
             );
