@@ -345,12 +345,11 @@ class _HealthRecordsViewState extends State<_HealthRecordsView> {
   /// to null and the caller treats that as "user cancelled".
   Future<String?> _pickFile() async {
     try {
-      final result = await FilePicker.pickFiles(
+      final result = await FilePicker.pickFile(
         type: FileType.custom,
         allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
       );
-      final path = result?.files.single.path;
-      return path;
+      return result?.path;
     } catch (_) {
       return null;
     }
